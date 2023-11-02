@@ -1,4 +1,4 @@
-package org.crayne.jtux.keyboard;
+package org.crayne.jtux.event.keyboard;
 
 import java.util.Arrays;
 import java.util.HashSet;

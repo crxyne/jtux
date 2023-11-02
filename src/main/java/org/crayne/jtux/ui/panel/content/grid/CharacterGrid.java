@@ -1,4 +1,4 @@
-package org.crayne.jtux.ux.panel.content.grid;
+package org.crayne.jtux.ui.panel.content.grid;
 
 import org.crayne.jtux.text.color.Color;
 import org.crayne.jtux.text.color.ansi.TextColor;
@@ -6,9 +6,9 @@ import org.crayne.jtux.text.color.ansi.TextColorBuilder;
 import org.crayne.jtux.text.component.Component;
 import org.crayne.jtux.text.component.ComponentPart;
 import org.crayne.jtux.util.math.vec.Vec2i;
-import org.crayne.jtux.ux.border.AbstractBorder;
-import org.crayne.jtux.ux.border.BorderCharacter;
-import org.crayne.jtux.ux.title.Title;
+import org.crayne.jtux.ui.border.AbstractBorder;
+import org.crayne.jtux.ui.border.BorderCharacter;
+import org.crayne.jtux.ui.title.Title;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -161,6 +161,14 @@ public abstract class CharacterGrid {
         resetTextColor();
     }
 
+    public void writeLine(@NotNull final Vec2i coord, @NotNull final Component component, final boolean wrap) {
+        if (wrap) {
+            writeLineWrap(coord, component);
+            return;
+        }
+        writeLine(coord, component);
+    }
+
     public int writeLineWrap(@NotNull final Vec2i coord, @NotNull final Component component) {
         int offsetX = 0, offsetY = 0;
         final int width = width(), height = height();
@@ -297,25 +305,14 @@ public abstract class CharacterGrid {
         }
         final Component titleText = title.title();
         final int titleWidth = titleText.text().length();
+        final float titleAlignment = title.alignment();
 
-        switch (title.alignment()) {
-            case CENTER -> {
-                final int leftBorderWidth = Math.max(0, topEdgeWidth / 2 - titleWidth / 2);
-                final int rightBorderWidth = topEdgeWidth - leftBorderWidth - titleWidth;
+        final int leftBorderWidth = (int) Math.max(0, topEdgeWidth * titleAlignment - titleWidth * titleAlignment);
+        final int rightBorderWidth = topEdgeWidth - leftBorderWidth - titleWidth;
 
-                fillLine(Vec2i.of(1, coordY), borderChar, leftBorderWidth);
-                writeLine(Vec2i.of(leftBorderWidth + 1, coordY), titleText);
-                fillLine(Vec2i.of(leftBorderWidth + 1 + titleWidth, coordY), borderChar, rightBorderWidth);
-            }
-            case LEFT -> {
-                writeLine(Vec2i.of(1, coordY), titleText);
-                fillLine(Vec2i.of(1 + titleWidth, coordY), borderChar, topEdgeWidth - titleWidth);
-            }
-            case RIGHT -> {
-                fillLine(Vec2i.of(1, coordY), borderChar, topEdgeWidth - titleWidth);
-                writeLine(Vec2i.of(topEdgeWidth - titleWidth + 1, coordY), titleText);
-            }
-        }
+        fillLine(Vec2i.of(1, coordY), borderChar, leftBorderWidth);
+        writeLine(Vec2i.of(leftBorderWidth + 1, coordY), titleText);
+        fillLine(Vec2i.of(leftBorderWidth + 1 + titleWidth, coordY), borderChar, rightBorderWidth);
     }
 
     public void drawVerticalEdge(@NotNull final BorderCharacter borderCharacter, final int coordX) {

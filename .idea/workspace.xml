@@ -1,19 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="jtux:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/jtux_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/GlobalEventManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/keyboard/KeyEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/keyboard/KeyEventType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/keyboard/KeyListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/keyboard/Keycode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/SimpleTextRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/Color.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/ansi/TextColor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/ansi/TextColorBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/space/HSV.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/space/RGB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/Component.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/ComponentBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/ComponentPart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/TextUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/util/RandomString.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/AbstractBorder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/Border.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderCharacter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderDefault.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/AbstractPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/ContainerPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/ContentPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/PanelOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/Content.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/ContentRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/grid/AnsiCharacterGrid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/grid/CharacterGrid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/grid/SystemOutCharacterGrid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/type/EmptyContentRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/title/Title.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/title/TitleAlignment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/ObjectUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/NativeJTuxLibrary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/MathUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/vec/BoundedVec3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/vec/Vec2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/vec/Vec2f.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/vec/Vec2i.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/native/JTuxLibrary.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/native/JTuxLibrary.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/native/build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/native/generate-header-file.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/native/jtux.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="jazwnt2r" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2XXIk7EjLCJyMTFjjupPgzznxub" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -21,12 +105,51 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/crayne/jtux/src/main/java/org/crayne/jtux&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/org/crayne/jtux" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/crayne/jtux/keyboard" />
+      <recent name="$PROJECT_DIR$/src/main/native" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.crayne.jtux.util.math" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.crayne.jtux.ux.border" />
+      <recent name="org.crayne.jtux.ux.title" />
+      <recent name="org.crayne.jtux.util.math" />
+      <recent name="org.crayne.jtux.util" />
+      <recent name="org.crayne.jtux.util.lib" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="ShConfigurationType" nameIsGenerated="true">
+      <option name="SCRIPT_TEXT" value="" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/run.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="true" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

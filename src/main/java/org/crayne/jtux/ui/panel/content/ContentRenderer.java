@@ -6,10 +6,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public abstract class ContentRenderer {
+public abstract class ContentRenderer implements Runnable {
     
     @Nullable
     private CharacterGrid characterGrid;
+
+    private boolean ready;
     
     public ContentRenderer() {
         this.characterGrid = null;
@@ -17,6 +19,14 @@ public abstract class ContentRenderer {
     
     public ContentRenderer(@Nullable final CharacterGrid characterGrid) {
         this.characterGrid = characterGrid;
+    }
+
+    public void ready(final boolean ready) {
+        this.ready = ready;
+    }
+
+    public boolean ready() {
+        return ready;
     }
 
     public void characterGrid(@Nullable final CharacterGrid characterGrid) {
@@ -28,6 +38,6 @@ public abstract class ContentRenderer {
         return Optional.ofNullable(characterGrid);
     }
 
-    public abstract void fullUpdate();
+    public abstract void run();
 
 }

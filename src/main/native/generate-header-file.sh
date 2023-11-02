@@ -1,5 +1,6 @@
-javac -h ../src/main/java/org/crayne/sketch/util/lib ../src/main/java/org/crayne/sketch/util/lib/NativeSketchLibrary.java
-mv ../src/main/java/org/crayne/sketch/util/lib/org_crayne_sketch_util_lib_NativeSketchLibrary.h .
-rm ../src/main/java/org/crayne/sketch/util/lib/NativeSketchLibrary.class
-rm SketchLibrary.h
-mv org_crayne_sketch_util_lib_NativeSketchLibrary.h SketchLibrary.h
+#!/bin/bash
+javac -h ../java/org/crayne/jtux/util/lib ../src/main/java/org/crayne/jtux/util/lib/NativeJTuxLibrary.java
+mv ../src/main/java/org/crayne/jtux/util/lib/org_crayne_jtux_util_lib_NativeJTuxLibrary.h .
+rm ../src/main/java/org/crayne/jtux/util/lib/NativeJTuxLibrary.class
+rm JTuxLibrary.h
+mv org_crayne_jtux_util_lib_NativeJTuxLibrary.h JTuxLibrary.h

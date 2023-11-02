@@ -1,6 +1,6 @@
-package org.crayne.jtux.ux.border;
+package org.crayne.jtux.ui.border;
 
-import org.crayne.jtux.ux.title.Title;
+import org.crayne.jtux.ui.title.Title;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

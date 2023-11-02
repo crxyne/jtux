@@ -1,8 +1,8 @@
-package org.crayne.sketch.util.lib;
+package org.crayne.jtux.util.lib;
 
-public class NativeSketchLibrary {
+public class NativeJTuxLibrary {
 
-    private NativeSketchLibrary() {}
+    private NativeJTuxLibrary() {}
 
     public static native int terminalWidth();
     public static native int terminalHeight();

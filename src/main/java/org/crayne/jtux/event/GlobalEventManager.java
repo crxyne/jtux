@@ -24,7 +24,7 @@ public class GlobalEventManager extends Thread {
 
     private int previousTerminalWidth, previousTerminalHeight;
 
-    private boolean active;
+    private volatile boolean active;
     private volatile boolean taskLock;
 
     @NotNull
@@ -47,8 +47,13 @@ public class GlobalEventManager extends Thread {
     public void run() {
         active = true;
 
+        new Thread(() -> {
+            while (active) {
+                handleKeyEvent(JTuxLibrary.awaitKeyboardEvent());
+            }
+        }).start();
+
         while (active) {
-            handleKeyEvent(JTuxLibrary.awaitKeyboardEvent());
             handleWindowEvent();
 
             synchronized (tasksSynchronized) {
@@ -75,7 +80,7 @@ public class GlobalEventManager extends Thread {
         );
     }
 
-    private void initialWindowUpdate(@NotNull final WindowListener listener) {
+    public void initialWindowUpdate(@NotNull final WindowListener listener) {
         listener.accept(createWindowEvent(JTuxLibrary.rawTerminalWidth(), JTuxLibrary.rawTerminalHeight(),
                 -1, -1,
                 true, true));
@@ -111,9 +116,11 @@ public class GlobalEventManager extends Thread {
                 event.character().orElse(null),
                 event.pressType());
 
-        synchronized (subscribedKeyListeners) {
-            subscribedKeyListeners.forEach(k -> k.accept(event));
-        }
+        scheduleSyncTaskForced(() -> {
+            synchronized (subscribedKeyListeners) {
+                subscribedKeyListeners.forEach(k -> k.accept(event));
+            }
+        });
 
         if (event.keyDown()) heldDown.add(event.keycode());
     }

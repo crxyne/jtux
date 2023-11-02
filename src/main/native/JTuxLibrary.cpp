@@ -13,10 +13,12 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "SketchLibrary.h"
-/* header for class org_crayne_sketch_util_lib_NativeSketchLibrary */
+#include "JTuxLibrary.h"
+/* header for class org_crayne_jtux_util_lib_NativeJTuxLibrary */
 
 #undef main
+
+bool initialized = false;
 
 int kbhit() {
     int ch = getch();
@@ -317,7 +319,7 @@ keyboard_event transform_keypress_septuple(const keyboard_event& ev) {
 
 keyboard_event transform_clipboard_paste(keyboard_event& ev) {
     keyboard_event new_ev;
-    for (int i = ev.size() - 1; i >= 0; i--) {
+    for (int i = ev.size() - 1; i > 0; i--) {
         if (ev[i] >= 194) {
             int uni = 60000 + unicode(ev[i], ev[i - 1]);
             new_ev.push_back(uni); // press
@@ -368,16 +370,20 @@ std::deque<KEY_EVENT> await_key_event() {
     return key_event(ev);
 }
 
-void init_sketch() {
+void init_jtux() {
+    if (initialized) return;
     initscr();
     noecho();
     nodelay(stdscr, true);
+    initialized = true;
 }
 
-void shutdown_sketch() {
+void shutdown_jtux() {
+    if (!initialized) return;
     nodelay(stdscr, false);
     echo();
     endwin();
+    initialized = false;
 }
 
 std::deque<KEY_EVENT> pending_key_events;
@@ -388,33 +394,33 @@ typedef struct Coord {
 } COORD;
 
 /*
- * Class:     org_crayne_sketch_util_lib_NativeSketchLibrary
+ * Class:     org_crayne_jtux_util_lib_NativeJTuxLibrary
  * Method:    terminalWidth
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_org_crayne_sketch_util_lib_NativeSketchLibrary_terminalWidth(JNIEnv * env, jclass o) {
+JNIEXPORT jint JNICALL Java_org_crayne_jtux_util_lib_NativeJTuxLibrary_terminalWidth(JNIEnv * env, jclass o) {
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     return w.ws_col - 1;
 }
 
 /*
- * Class:     org_crayne_sketch_util_lib_NativeSketchLibrary
+ * Class:     org_crayne_jtux_util_lib_NativeJTuxLibrary
  * Method:    terminalHeight
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_org_crayne_sketch_util_lib_NativeSketchLibrary_terminalHeight(JNIEnv * env, jclass o) {
+JNIEXPORT jint JNICALL Java_org_crayne_jtux_util_lib_NativeJTuxLibrary_terminalHeight(JNIEnv * env, jclass o) {
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     return w.ws_row - 1;
 }
 
 /*
- * Class:     org_crayne_sketch_util_lib_NativeSketchLibrary
+ * Class:     org_crayne_jtux_util_lib_NativeJTuxLibrary
  * Method:    keyPress
  * Signature: ()[I
  */
-JNIEXPORT jintArray JNICALL Java_org_crayne_sketch_util_lib_NativeSketchLibrary_keyPress(JNIEnv * env, jclass o) {
+JNIEXPORT jintArray JNICALL Java_org_crayne_jtux_util_lib_NativeJTuxLibrary_keyPress(JNIEnv * env, jclass o) {
     if (pending_key_events.empty()) {
         pending_key_events = await_key_event();
     }
@@ -437,21 +443,21 @@ JNIEXPORT jintArray JNICALL Java_org_crayne_sketch_util_lib_NativeSketchLibrary_
 
 
 /*
- * Class:     org_crayne_sketch_util_lib_NativeSketchLibrary
+ * Class:     org_crayne_jtux_util_lib_NativeJTuxLibrary
  * Method:    init
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_crayne_sketch_util_lib_NativeSketchLibrary_init
+JNIEXPORT void JNICALL Java_org_crayne_jtux_util_lib_NativeJTuxLibrary_init
   (JNIEnv * env, jclass o) {
-    init_sketch();
+    init_jtux();
   }
 
 /*
- * Class:     org_crayne_sketch_util_lib_NativeSketchLibrary
+ * Class:     org_crayne_jtux_util_lib_NativeJTuxLibrary
  * Method:    shutdown
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_crayne_sketch_util_lib_NativeSketchLibrary_shutdown
+JNIEXPORT void JNICALL Java_org_crayne_jtux_util_lib_NativeJTuxLibrary_shutdown
   (JNIEnv * env, jclass o) {
-    shutdown_sketch();
+    shutdown_jtux();
   }

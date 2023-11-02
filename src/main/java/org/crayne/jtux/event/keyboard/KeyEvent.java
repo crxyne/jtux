@@ -1,4 +1,4 @@
-package org.crayne.jtux.keyboard;
+package org.crayne.jtux.event.keyboard;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,6 +34,11 @@ public class KeyEvent {
 
     public static KeyEvent empty() {
         return new KeyEvent(Keycode.UNKNOWN, Collections.emptyList(), null, KeyEventType.UNKNOWN);
+    }
+
+    public boolean isEmpty() {
+        return keycode == Keycode.UNKNOWN && heldDown.isEmpty()
+                && character().isEmpty() && pressType == KeyEventType.UNKNOWN;
     }
 
     public static KeyEvent keybind(@NotNull final Keycode keycode, @NotNull final Keycode... heldDown) {

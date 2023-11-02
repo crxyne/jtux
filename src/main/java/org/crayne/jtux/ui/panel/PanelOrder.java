@@ -1,4 +1,4 @@
-package org.crayne.jtux.ux.panel;
+package org.crayne.jtux.ui.panel;
 
 public enum PanelOrder {
 

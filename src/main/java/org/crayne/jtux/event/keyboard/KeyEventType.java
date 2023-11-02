@@ -1,4 +1,4 @@
-package org.crayne.jtux.keyboard;
+package org.crayne.jtux.event.keyboard;
 
 public enum KeyEventType {
 

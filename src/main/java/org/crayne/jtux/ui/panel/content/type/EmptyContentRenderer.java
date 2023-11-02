@@ -1,16 +1,10 @@
-package org.crayne.jtux.ux.panel.content.type;
+package org.crayne.jtux.ui.panel.content.type;
 
-import org.crayne.jtux.ux.panel.content.ContentRenderer;
-import org.crayne.jtux.ux.panel.content.grid.CharacterGrid;
-import org.jetbrains.annotations.NotNull;
+import org.crayne.jtux.ui.panel.content.ContentRenderer;
 
 public class EmptyContentRenderer extends ContentRenderer {
 
-    public void update(@NotNull final CharacterGrid characterGrid) {
-
-    }
-
-    public void fullUpdate(@NotNull final CharacterGrid characterGrid) {
+    public void run() {
 
     }
 

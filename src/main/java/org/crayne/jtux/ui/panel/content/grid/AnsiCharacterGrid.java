@@ -1,4 +1,4 @@
-package org.crayne.jtux.ux.panel.content.grid;
+package org.crayne.jtux.ui.panel.content.grid;
 
 import org.crayne.jtux.text.color.ansi.TextColor;
 import org.crayne.jtux.util.math.vec.Vec2i;

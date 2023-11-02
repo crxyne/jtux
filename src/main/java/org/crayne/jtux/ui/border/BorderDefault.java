@@ -1,4 +1,4 @@
-package org.crayne.jtux.ux.border;
+package org.crayne.jtux.ui.border;
 
 import org.crayne.jtux.text.color.ansi.TextColor;
 import org.jetbrains.annotations.NotNull;

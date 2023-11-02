@@ -1,10 +1,10 @@
-package org.crayne.jtux.ux.panel;
+package org.crayne.jtux.ui.panel;
 
 import org.crayne.jtux.util.math.vec.Vec2f;
-import org.crayne.jtux.ux.border.AbstractBorder;
-import org.crayne.jtux.ux.panel.content.Content;
-import org.crayne.jtux.ux.panel.content.ContentRenderer;
-import org.crayne.jtux.ux.panel.content.type.EmptyContentRenderer;
+import org.crayne.jtux.ui.border.AbstractBorder;
+import org.crayne.jtux.ui.panel.content.Content;
+import org.crayne.jtux.ui.panel.content.ContentRenderer;
+import org.crayne.jtux.ui.panel.content.type.EmptyContentRenderer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -104,6 +104,7 @@ public class ContainerPanel extends AbstractPanel {
     public void ready(final boolean ready) {
         super.ready(ready);
         children.forEach(c -> c.ready(ready));
+        if (ready) updatePanel();
     }
 
     @NotNull

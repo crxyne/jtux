@@ -1,4 +1,4 @@
-package org.crayne.jtux.util.math;
+package org.crayne.jtux.util.math.vec;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,6 +12,10 @@ public class Vec2f implements Vec2<Float> {
     }
 
     @NotNull
+    public static Vec2f of(final float x, final float y) {
+        return new Vec2f(x, y);
+    }
+    @NotNull
     public Float x() {
         return x;
     }
@@ -23,7 +27,12 @@ public class Vec2f implements Vec2<Float> {
 
     @NotNull
     public static Vec2f zero() {
-        return new Vec2f(0f, 0f);
+        return new Vec2f(0.0f, 0.0f);
+    }
+
+    @NotNull
+    public static Vec2f unary() {
+        return new Vec2f(1.0f, 1.0f);
     }
 
     @NotNull

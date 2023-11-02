@@ -1,10 +1,10 @@
-package org.crayne.jtux.ux.panel;
+package org.crayne.jtux.ui.panel;
 
 import org.crayne.jtux.util.ObjectUtil;
 import org.crayne.jtux.util.math.vec.Vec2f;
-import org.crayne.jtux.ux.border.AbstractBorder;
-import org.crayne.jtux.ux.panel.content.Content;
-import org.crayne.jtux.ux.panel.content.grid.CharacterGrid;
+import org.crayne.jtux.ui.border.AbstractBorder;
+import org.crayne.jtux.ui.panel.content.Content;
+import org.crayne.jtux.ui.panel.content.grid.CharacterGrid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,6 +43,7 @@ public abstract class AbstractPanel {
 
     public void ready(final boolean ready) {
         this.ready = ready;
+        content.renderer().ready(ready);
     }
 
     public boolean ready() {
@@ -59,12 +60,12 @@ public abstract class AbstractPanel {
         if (border().isEmpty()) {
             contentGrid.offsetX(fullCharacterGrid.offsetX());
             contentGrid.offsetY(fullCharacterGrid.offsetY());
-            content.updateSize(fullCharacterGrid.width(), fullCharacterGrid.height(), ready);
+            content.updateSize(fullCharacterGrid.width(), fullCharacterGrid.height());
             return;
         }
         contentGrid.offsetX(fullCharacterGrid.offsetX() + 1);
         contentGrid.offsetY(fullCharacterGrid.offsetY() + 1);
-        content.updateSize(fullCharacterGrid.width() - 2, fullCharacterGrid.height() - 2, ready);
+        content.updateSize(fullCharacterGrid.width() - 2, fullCharacterGrid.height() - 2);
     }
 
     protected void updateFullGridSize(@NotNull final CharacterGrid parentGrid, final int offsetX, final int offsetY,
@@ -88,7 +89,7 @@ public abstract class AbstractPanel {
         if (contentGrid.isEmpty()){
             final CharacterGrid newContentGrid = fullGrid.createContentGrid(border().isPresent());
             content.characterGrid(newContentGrid);
-            if (ready) content.renderer().fullUpdate(newContentGrid);
+            if (ready) content.fullUpdate();
             return;
         }
         updateContentGridSize(fullGrid);
@@ -152,8 +153,8 @@ public abstract class AbstractPanel {
     }
 
     public void updatePanel() {
-        updateBorder();
         updateContent();
+        updateBorder();
     }
 
 }
