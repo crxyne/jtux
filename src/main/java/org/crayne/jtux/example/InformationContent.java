@@ -2,11 +2,11 @@ package org.crayne.jtux.example;
 
 import org.crayne.jtux.text.color.Color;
 import org.crayne.jtux.text.component.Component;
-import org.crayne.jtux.ui.panel.content.ContentRenderer;
+import org.crayne.jtux.ui.content.Content;
 import org.crayne.jtux.util.math.vec.Vec2i;
 import org.jetbrains.annotations.NotNull;
 
-public class InformationRenderer extends ContentRenderer {
+public class InformationContent extends Content {
 
     @NotNull
     private final Color color = Color.randomColor();
@@ -18,7 +18,7 @@ public class InformationRenderer extends ContentRenderer {
     @NotNull
     private final ExampleUI ui;
 
-    public InformationRenderer(@NotNull final ExampleUI ui) {
+    public InformationContent(@NotNull final ExampleUI ui) {
         this.ui = ui;
     }
 

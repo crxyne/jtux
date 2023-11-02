@@ -151,8 +151,8 @@ public class GlobalEventManager extends Thread {
     }
 
     public void pushSynchronizedTask(@NotNull final Runnable runnable) throws ConcurrentModificationException {
-        if (taskLock) throw new ConcurrentModificationException();
         synchronized (tasksSynchronized) {
+            if (taskLock) throw new ConcurrentModificationException();
             tasksSynchronized.add(runnable);
         }
     }

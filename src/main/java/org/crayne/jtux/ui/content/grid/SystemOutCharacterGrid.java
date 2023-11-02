@@ -1,4 +1,4 @@
-package org.crayne.jtux.ui.panel.content.grid;
+package org.crayne.jtux.ui.content.grid;
 
 public class SystemOutCharacterGrid extends AnsiCharacterGrid {
 

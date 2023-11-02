@@ -1,18 +1,18 @@
 package org.crayne.jtux.example;
 
 import org.crayne.jtux.text.component.Component;
-import org.crayne.jtux.ui.panel.content.ContentRenderer;
+import org.crayne.jtux.ui.content.Content;
 import org.crayne.jtux.util.math.vec.Vec2i;
 import org.jetbrains.annotations.NotNull;
 
-public class SimpleTextRenderer extends ContentRenderer {
+public class SimpleTextContent extends Content {
 
     private boolean wrap;
 
     @NotNull
     private Component component;
 
-    public SimpleTextRenderer(@NotNull final Component component, final boolean wrap) {
+    public SimpleTextContent(@NotNull final Component component, final boolean wrap) {
         this.wrap = wrap;
         this.component = component;
     }

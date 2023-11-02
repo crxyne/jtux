@@ -1,4 +1,4 @@
-package org.crayne.jtux.ui.panel.content.grid;
+package org.crayne.jtux.ui.content.grid;
 
 import org.crayne.jtux.text.color.Color;
 import org.crayne.jtux.text.color.ansi.TextColor;
@@ -113,7 +113,7 @@ public abstract class CharacterGrid {
     public abstract void clear();
 
     public void putString(@NotNull final Vec2i coord, @NotNull final String str) {
-        if (coord.x() >= width() || coord.y() >= height()) return;
+        if (coord.x() >= width() || coord.y() >= height() || coord.x() < 0 || coord.y() < 0) return;
         putStringRaw(coord.add(offsetX(), offsetY()), str);
     }
 
@@ -146,7 +146,7 @@ public abstract class CharacterGrid {
         if (fixedEndX - startX < 0) return -1;
 
         putString(coord, str.substring(0, fixedEndX - startX));
-        return fixedEndX;
+        return endX;
     }
 
     public void writeLine(@NotNull final Vec2i coord, @NotNull final Component component) {
@@ -172,7 +172,7 @@ public abstract class CharacterGrid {
     public int writeLineWrap(@NotNull final Vec2i coord, @NotNull final Component component) {
         int offsetX = 0, offsetY = 0;
         final int width = width(), height = height();
-        final int coordX = coord.x();
+        int coordX = coord.x();
         final int coordY = coord.y();
 
         for (final ComponentPart part : component.parts())  {
@@ -188,6 +188,7 @@ public abstract class CharacterGrid {
                 text = text.substring(toPrint.length());
                 offsetY++;
                 offsetX = 0;
+                coordX = 0;
 
                 if (offsetY > height) {
                     resetTextColor();
@@ -216,7 +217,7 @@ public abstract class CharacterGrid {
         for (int i = 0; i < fixedEndX - coord.x(); i++) {
             putCharacter(Vec2i.of(i + coord.x(), coord.y()), characterByIndex.apply(i));
         }
-        return fixedEndX;
+        return endX;
     }
 
     public void fillBar(@NotNull final Vec2i coord, final char character, final int height) {

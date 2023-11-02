@@ -11,8 +11,9 @@ import org.crayne.jtux.text.component.TextUtil;
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.border.BorderDefault;
 import org.crayne.jtux.ui.panel.ContainerPanel;
+import org.crayne.jtux.ui.panel.ContentPanel;
 import org.crayne.jtux.ui.panel.PanelOrder;
-import org.crayne.jtux.ui.panel.content.grid.CharacterGrid;
+import org.crayne.jtux.ui.content.grid.CharacterGrid;
 import org.crayne.jtux.ui.title.Title;
 import org.crayne.jtux.util.lib.JTuxLibrary;
 import org.crayne.jtux.util.math.vec.Vec2f;
@@ -35,7 +36,7 @@ public class ExampleUI {
     private final ContainerPanel parent;
 
     @NotNull
-    private final InformationRenderer informationRenderer;
+    private final ContentPanel informationPanel;
 
     public ExampleUI() {
         this.totalUpdates = 0;
@@ -48,13 +49,13 @@ public class ExampleUI {
 
         parent.fullCharacterGrid(JTuxLibrary.out);
 
-        parent.createPanel(createBorder(BorderDefault.NONE, "i am content panel 1"), new SimpleTextRenderer(
+        parent.createPanel(createBorder(BorderDefault.NONE, "i am content panel 1"), new SimpleTextContent(
                 createGradientText(Color.randomColor(),
                         "i am a wrapping text. if i don't have enough space on one line," +
                                 " i will use the space on the next line instead."
                 ), true)
         );
-        parent.createPanel(createBorder(BorderDefault.NONE, "i am content panel 2"), new SimpleTextRenderer(
+        parent.createPanel(createBorder(BorderDefault.NONE, "i am content panel 2"), new SimpleTextContent(
                 createGradientText(Color.randomColor(),
                         "i am not a wrapping text. if i don't have enough space on one " +
                                 "line, my text will be cut off."
@@ -64,9 +65,8 @@ public class ExampleUI {
         final ContainerPanel innerContainer = parent.createContainer(createBorder(BorderDefault.DOUBLE,
                 "i am a container"), PanelOrder.TOP_TO_BOTTOM);
 
-        informationRenderer = new InformationRenderer(this);
-        innerContainer.createPanel(createBorder(BorderDefault.NORMAL, "i am an inner panel, panel 3"),
-                Vec2f.of(1.0f, 0.75f), informationRenderer);
+        informationPanel = innerContainer.createPanel(createBorder(BorderDefault.NORMAL, "i am an inner panel, panel 3"),
+                Vec2f.of(1.0f, 0.75f), new InformationContent(this));
 
         innerContainer.createPanel(createBorder(BorderDefault.NORMAL, "i am an inner panel, panel 4"),
                 Vec2f.of(1.0f, 0.25f));
@@ -80,7 +80,7 @@ public class ExampleUI {
         windowListener.start();
 
         final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(() -> GlobalEventManager.scheduleSyncTaskCancellable(informationRenderer), 100, 100, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(() -> GlobalEventManager.scheduleSyncTaskCancellable(informationPanel.content()::fullUpdate), 1, 1, TimeUnit.MILLISECONDS);
     }
 
     private void exit(@NotNull final KeyEvent event) {

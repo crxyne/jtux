@@ -1,10 +1,9 @@
 package org.crayne.jtux.ui.panel;
 
-import org.crayne.jtux.util.math.vec.Vec2f;
 import org.crayne.jtux.ui.border.AbstractBorder;
-import org.crayne.jtux.ui.panel.content.Content;
-import org.crayne.jtux.ui.panel.content.ContentRenderer;
-import org.crayne.jtux.ui.panel.content.type.EmptyContentRenderer;
+import org.crayne.jtux.ui.content.Content;
+import org.crayne.jtux.ui.content.type.EmptyContent;
+import org.crayne.jtux.util.math.vec.Vec2f;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,7 +24,7 @@ public class ContainerPanel extends AbstractPanel {
     public ContainerPanel(@Nullable final AbstractBorder border, @NotNull final Vec2f formatSize,
                           @NotNull final Collection<AbstractPanel> children,
                           @NotNull final PanelOrder order) {
-        super(border, formatSize, null, new Content(null, new EmptyContentRenderer()));
+        super(border, formatSize, null, new EmptyContent());
         this.children = new ArrayList<>(children);
         this.order = order;
     }
@@ -109,35 +108,35 @@ public class ContainerPanel extends AbstractPanel {
 
     @NotNull
     public ContentPanel createPanel(@Nullable final AbstractBorder border, @NotNull final Vec2f formatSize,
-                                    @NotNull final ContentRenderer renderer) {
+                                    @NotNull final Content renderer) {
         final ContentPanel panel = new ContentPanel(border, formatSize, this, renderer);
         addPanel(panel);
         return panel;
     }
 
     @NotNull
-    public ContentPanel createPanel(@Nullable final AbstractBorder border, @NotNull final ContentRenderer renderer) {
+    public ContentPanel createPanel(@Nullable final AbstractBorder border, @NotNull final Content renderer) {
         return createPanel(border, Vec2f.unary(), renderer);
     }
 
     @NotNull
-    public ContentPanel createPanel(@NotNull final Vec2f formatSize, @NotNull final ContentRenderer renderer) {
+    public ContentPanel createPanel(@NotNull final Vec2f formatSize, @NotNull final Content renderer) {
         return createPanel(null, formatSize, renderer);
     }
 
     @NotNull
     public ContentPanel createPanel(@NotNull final Vec2f formatSize) {
-        return createPanel(null, formatSize, new EmptyContentRenderer());
+        return createPanel(null, formatSize, new EmptyContent());
     }
 
     @NotNull
     public ContentPanel createPanel(@Nullable final AbstractBorder border) {
-        return createPanel(border, new EmptyContentRenderer());
+        return createPanel(border, new EmptyContent());
     }
 
     @NotNull
     public ContentPanel createPanel(@Nullable final AbstractBorder border, @NotNull final Vec2f formatSize) {
-        return createPanel(border, formatSize, new EmptyContentRenderer());
+        return createPanel(border, formatSize, new EmptyContent());
     }
 
     @NotNull

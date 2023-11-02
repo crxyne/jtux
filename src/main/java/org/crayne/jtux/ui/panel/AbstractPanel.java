@@ -1,10 +1,10 @@
 package org.crayne.jtux.ui.panel;
 
+import org.crayne.jtux.ui.border.AbstractBorder;
+import org.crayne.jtux.ui.content.Content;
+import org.crayne.jtux.ui.content.grid.CharacterGrid;
 import org.crayne.jtux.util.ObjectUtil;
 import org.crayne.jtux.util.math.vec.Vec2f;
-import org.crayne.jtux.ui.border.AbstractBorder;
-import org.crayne.jtux.ui.panel.content.Content;
-import org.crayne.jtux.ui.panel.content.grid.CharacterGrid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +43,7 @@ public abstract class AbstractPanel {
 
     public void ready(final boolean ready) {
         this.ready = ready;
-        content.renderer().ready(ready);
+        content.ready(ready);
     }
 
     public boolean ready() {
@@ -89,7 +89,7 @@ public abstract class AbstractPanel {
         if (contentGrid.isEmpty()){
             final CharacterGrid newContentGrid = fullGrid.createContentGrid(border().isPresent());
             content.characterGrid(newContentGrid);
-            if (ready) content.fullUpdate();
+            content.fullUpdate();
             return;
         }
         updateContentGridSize(fullGrid);
@@ -142,14 +142,16 @@ public abstract class AbstractPanel {
     }
 
     public void updateBorder() {
-        if (ready) border().ifPresent(b -> fullCharacterGrid().ifPresent(c -> {
+        if (!content().ready()) return;
+
+        border().ifPresent(b -> fullCharacterGrid().ifPresent(c -> {
             c.drawBorder(b);
             c.flush();
         }));
     }
 
     public void updateContent() {
-        if (ready) content().fullUpdate();
+        content().fullUpdate();
     }
 
     public void updatePanel() {
