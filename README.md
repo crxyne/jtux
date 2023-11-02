@@ -1,5 +1,5 @@
 # JTux
-Java Terminal UX (JTux) - A TUI library made in java
+Java Terminal UX (JTux) - A TUI library made for java
 
 ## Information
 This library is still WIP! Documentation and further explanation coming soon.
