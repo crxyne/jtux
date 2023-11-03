@@ -25,7 +25,7 @@ public abstract class Component {
     private final float alignment;
 
     @Nullable
-    private final AbstractBorder border;
+    private AbstractBorder border;
 
     private boolean ready;
 
@@ -135,6 +135,10 @@ public abstract class Component {
         return Optional.ofNullable(border);
     }
 
+    public void border(@Nullable final AbstractBorder border) {
+        this.border = border;
+    }
+
     @NotNull
     public Vec2f format() {
         return format;
@@ -192,12 +196,14 @@ public abstract class Component {
         if (contentGrid == null) return;
 
         contentGrid.updateSize(width, height);
-        if (ready) updateContent();
     }
 
     public void updateFullSize(final int width, final int height) {
-        fullGrid().orElseThrow().updateSize(width, height);
-        updateSize();
+        fullGrid().ifPresent(grid -> {
+            grid.updateSize(width, height);
+            updateSize();
+            grid.clearAndFlush();
+        });
     }
 
     public void updateSize() {
@@ -210,7 +216,6 @@ public abstract class Component {
         if (contentGridOptional.isEmpty()){
             final CharacterGrid newContentGrid = fullGrid.createContentGrid(border().isPresent());
             contentGrid(newContentGrid);
-            updateContent();
             return;
         }
 
@@ -219,7 +224,6 @@ public abstract class Component {
             contentGrid.offsetX(fullGrid.offsetX());
             contentGrid.offsetY(fullGrid.offsetY());
             updateContentGridSize(fullGrid.width(), fullGrid.height());
-            updateContent();
             return;
         }
         contentGrid.offsetX(fullGrid.offsetX() + 1);

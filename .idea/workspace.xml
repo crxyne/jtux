@@ -9,17 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="refactoring &amp; getting stuff ready for more complicated panels (input fields, aligned text, log panels, etc)">
+    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="rewrote alignments and now allowing components to specify their alignment inside of a container">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/JTuxEventBus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/JTuxEventBus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/util/TextUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/util/TextUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/SystemOutCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/SystemOutCharacterGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Alignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Alignment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699033666692</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="rewrote alignments and now allowing components to specify their alignment inside of a container">
+      <created>1699043669989</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699043669989</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -201,6 +204,7 @@
     <MESSAGE value="rewrote ansi cleanup &amp; refactoring" />
     <MESSAGE value="changed Component to Text and made it immutable" />
     <MESSAGE value="refactoring &amp; getting stuff ready for more complicated panels (input fields, aligned text, log panels, etc)" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring &amp; getting stuff ready for more complicated panels (input fields, aligned text, log panels, etc)" />
+    <MESSAGE value="rewrote alignments and now allowing components to specify their alignment inside of a container" />
+    <option name="LAST_COMMIT_MESSAGE" value="rewrote alignments and now allowing components to specify their alignment inside of a container" />
   </component>
 </project>

@@ -74,11 +74,10 @@ public class ExampleUI {
     }
 
     private void handleWindowEvent(@NotNull final WindowEvent event) {
-        final int width = event.terminalWidth(), height = event.terminalHeight();
+        final int width = event.rawTerminalWidth() + 1, height = event.rawTerminalHeight() + 1;
         final Optional<CharacterGrid> characterGrid = parent.fullGrid();
 
         if (characterGrid.isEmpty()) return;
-        if (event.windowSizeUpdated()) characterGrid.get().clear();
 
         parent.updateFullSize(width, height);
         parent.updateChildrenSizes();

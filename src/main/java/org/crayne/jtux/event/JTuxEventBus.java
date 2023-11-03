@@ -97,7 +97,7 @@ public class JTuxEventBus extends Thread {
                     false, false);
 
             synchronized (subscribedWindowListeners) {
-                subscribedWindowListeners.forEach(w -> w.accept(event));
+                subscribedWindowListeners.forEach(w -> scheduleSyncTask(() -> w.accept(event)));
             }
 
             if (rawTerminalHeight != -1) previousTerminalHeight = rawTerminalHeight;
