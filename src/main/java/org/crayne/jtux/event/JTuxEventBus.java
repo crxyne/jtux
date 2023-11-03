@@ -115,7 +115,7 @@ public class JTuxEventBus extends Thread {
                 event.pressType());
 
         synchronized (subscribedKeyListeners) {
-            subscribedKeyListeners.forEach(k -> k.accept(event));
+            subscribedKeyListeners.forEach(k -> scheduleSyncTask(() -> k.accept(event)));
         }
 
         if (event.keyDown()) heldDown.add(event.keycode());
@@ -152,7 +152,7 @@ public class JTuxEventBus extends Thread {
         }
     }
 
-    public synchronized void shutdown() {
+    public void shutdown() {
         active = false;
     }
 

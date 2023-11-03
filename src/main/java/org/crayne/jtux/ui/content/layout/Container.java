@@ -19,17 +19,16 @@ public class Container extends Component {
     @NotNull
     private final RenderOrder order;
 
-    public Container(@Nullable final Container parent, @NotNull final Vec2f format,
-                     @Nullable final AbstractBorder border, @NotNull final RenderOrder order) {
-        super(parent, format, border);
+    public Container(@NotNull final Vec2f format, @Nullable final AbstractBorder border,
+                     @NotNull final RenderOrder order) {
+        super(format, border);
         this.order = order;
         this.components = new ArrayList<>();
     }
 
-    public Container(@Nullable final Container parent, @NotNull final Vec2f format,
-                     @Nullable final AbstractBorder border, @NotNull final RenderOrder order,
-                     @NotNull final Collection<Component> components) {
-        super(parent, format, border);
+    public Container(@NotNull final Vec2f format, @Nullable final AbstractBorder border,
+                     @NotNull final RenderOrder order, @NotNull final Collection<Component> components) {
+        super(format, border);
         this.order = order;
         this.components = new ArrayList<>(components);
     }
@@ -45,9 +44,12 @@ public class Container extends Component {
         return Collections.unmodifiableList(components);
     }
 
-    public void addComponent(@NotNull final Component component) {
+    @NotNull
+    public Component addComponent(@NotNull final Component component) {
+        component.parent(this);
         components.add(component);
         updateChildrenSizes();
+        return component;
     }
 
     public void updateChildrenSizes() {
@@ -63,26 +65,33 @@ public class Container extends Component {
     private void updateChildrenSizes(final boolean useY, final int usableWidth, final int usableHeight) {
         int totalUsedSpace = 0;
         final int usableSpace = useY ? usableHeight : usableWidth;
+        final int otherUsableSpace = useY ? usableWidth : usableHeight;
+
         final ToDoubleFunction<Vec2f> componentFunction = useY ? Vec2f::y : Vec2f::x;
         final ToDoubleFunction<Vec2f> otherComponentFunction = useY ? Vec2f::x : Vec2f::y;
+
+        final double maxRatio = components.stream().map(Component::format).mapToDouble(componentFunction).sum();
 
         for (int i = 0; i < components.size(); i++) {
             final Component component = components.get(i);
             final boolean last = i + 1 == components.size();
 
-            final double spaceRatio = componentFunction.applyAsDouble(component.format());
-            final double otherSpaceModifier = otherComponentFunction.applyAsDouble(component.format());
+            final double spaceRatio = componentFunction.applyAsDouble(component.format()) / maxRatio;
+            final double otherSpaceModifier = Math.min(1.0f, otherComponentFunction.applyAsDouble(component.format()));
+            final float alignment = component.alignment();
 
             final int usedSpace = last ? usableSpace - totalUsedSpace : (int) (spaceRatio * usableSpace);
             final int previousOffset = totalUsedSpace;
             totalUsedSpace += usedSpace;
 
+            final int alignedSpace = Alignment.align((int) (otherUsableSpace * otherSpaceModifier), otherUsableSpace, alignment);
+
             contentGrid().ifPresent(grid -> {
                 if (useY) {
-                    component.updateFullGridSize(grid, 0, previousOffset, (int) (usableWidth * otherSpaceModifier), usedSpace);
+                    component.updateFullGridSize(grid, alignedSpace, previousOffset, (int) (usableWidth * otherSpaceModifier), usedSpace);
                     return;
                 }
-                component.updateFullGridSize(grid, previousOffset, 0, usedSpace, (int) (usableHeight * otherSpaceModifier));
+                component.updateFullGridSize(grid, previousOffset, alignedSpace, usedSpace, (int) (usableHeight * otherSpaceModifier));
             });
         }
         components.forEach(Component::updateSize);

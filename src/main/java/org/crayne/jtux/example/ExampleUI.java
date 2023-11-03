@@ -28,15 +28,25 @@ public class ExampleUI {
     @NotNull
     private final Container parent;
 
+    @NotNull
+    private final Component component;
+
     public ExampleUI() {
-        parent = new Container(null, Vec2f.unary(), createBorder(BorderDefault.NORMAL,
+        parent = new Container(Vec2f.unary(), createBorder(BorderDefault.NORMAL,
                 "i am the outer panel (this is the top title)",
                 "i am the outer panel (this is the bottom title)"),
                 RenderOrder.LEFT_TO_RIGHT);
 
         parent.fullGrid(JTuxLibrary.out);
 
-        parent.addComponent(new Component(parent, Vec2f.unary(), createBorder(BorderDefault.NONE, "i am content panel 1")) {
+        component = parent.addComponent(new Component(Vec2f.of(1.0f, 0.5f), 0.5f, createBorder(BorderDefault.NORMAL, "i am content panel 1")) {
+            public void render() {
+                final Optional<CharacterGrid> grid = contentGrid();
+                grid.ifPresent(g -> g.writeLine(Vec2i.origin(), "hello, world!"));
+            }
+        });
+
+        parent.addComponent(new Component(Vec2f.of(1.0f, 0.5f), createBorder(BorderDefault.NORMAL, "i am content panel 2")) {
             public void render() {
                 final Optional<CharacterGrid> grid = contentGrid();
                 grid.ifPresent(g -> g.writeLine(Vec2i.origin(), "hello, world!"));
@@ -45,16 +55,22 @@ public class ExampleUI {
     }
 
     public void start() {
-        final KeyListener keyListener = this::exit;
+        final KeyListener keyListener = this::handleKeyEvent;
         final WindowListener windowListener = this::handleWindowEvent;
 
         keyListener.start();
         windowListener.start();
     }
 
-    private void exit(@NotNull final KeyEvent event) {
-        JTuxLibrary.shutdown();
-        System.exit(0);
+    private void handleKeyEvent(@NotNull final KeyEvent event) {
+        if (!event.keyDown()) return;
+        switch (event.keycode()) {
+            case V -> component.hidden(!component.hidden());
+            case C -> {
+                JTuxLibrary.shutdown();
+                System.exit(0);
+            }
+        }
     }
 
     private void handleWindowEvent(@NotNull final WindowEvent event) {

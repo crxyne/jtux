@@ -17,24 +17,102 @@ public abstract class Component {
     private CharacterGrid fullGrid;
 
     @Nullable
-    private final Container parent;
+    private Container parent;
 
     @NotNull
     private final Vec2f format;
+
+    private final float alignment;
 
     @Nullable
     private final AbstractBorder border;
 
     private boolean ready;
 
-    public Component(@Nullable final Container parent, @NotNull final Vec2f format,
-                     @Nullable final AbstractBorder border) {
-        this.parent = parent;
+    private boolean hidden;
+
+    public Component(@NotNull final Vec2f format, final float alignment, @Nullable final AbstractBorder border, final boolean hidden) {
+        if (format.x() < 0 || format.y() < 0) throw new IllegalArgumentException("Component format cannot have negative components");
+        if (alignment < 0.0f || alignment > 1.0f) throw new IllegalArgumentException("Component alignment must be between 0 and 1");
+
         this.format = format;
+        this.alignment = alignment;
         this.border = border;
         this.contentGrid = null;
         this.fullGrid = null;
         this.ready = false;
+        this.hidden = hidden;
+    }
+
+    public Component(@NotNull final Vec2f format, final boolean hidden) {
+        this(format, Alignment.PRIMARY.floatValue(), null, hidden);
+    }
+
+    public Component(@NotNull final Vec2f format, final float alignment, final boolean hidden) {
+        this(format, alignment, null, hidden);
+    }
+
+    public Component(@NotNull final Vec2f format, @NotNull final Alignment alignment, final boolean hidden) {
+        this(format, alignment.floatValue(), null, hidden);
+    }
+
+    public Component(@NotNull final Vec2f format, @Nullable final AbstractBorder border) {
+        this(format, Alignment.PRIMARY.floatValue(), border, false);
+    }
+
+    public Component(@NotNull final Vec2f format, final float alignment, @Nullable final AbstractBorder border) {
+        this(format, alignment, border, false);
+    }
+
+    public Component(@NotNull final Vec2f format, @NotNull final Alignment alignment, @Nullable final AbstractBorder border) {
+        this(format, alignment.floatValue(), border, false);
+    }
+
+    public Component(@NotNull final Vec2f format) {
+        this(format, false);
+    }
+
+    public Component(@NotNull final Vec2f format, final float alignment) {
+        this(format, alignment, false);
+    }
+
+    public Component(@NotNull final Vec2f format, @NotNull final Alignment alignment) {
+        this(format, alignment.floatValue(), false);
+    }
+
+    public Component(@Nullable final AbstractBorder border, final boolean hidden) {
+        this(Vec2f.unary(), Alignment.PRIMARY.floatValue(), border, hidden);
+    }
+
+    public Component(@Nullable final AbstractBorder border) {
+        this(border, false);
+    }
+
+    public Component(final boolean hidden) {
+        this(Vec2f.unary(), hidden);
+    }
+
+    public Component() {
+        this(false);
+    }
+
+    public boolean hidden() {
+        return hidden;
+    }
+
+    public void hidden(final boolean hidden) {
+        this.hidden = hidden;
+        if (!ready) return;
+
+        if (hidden) {
+            fullGrid().ifPresent(CharacterGrid::clear);
+            contentGrid().ifPresent(CharacterGrid::clear);
+        }
+        update();
+    }
+
+    protected void parent(@NotNull final Container parent) {
+        this.parent = parent;
     }
 
     protected void setReady() {
@@ -60,6 +138,10 @@ public abstract class Component {
     @NotNull
     public Vec2f format() {
         return format;
+    }
+
+    public float alignment() {
+        return alignment;
     }
 
     @NotNull
@@ -101,7 +183,7 @@ public abstract class Component {
     public void updateContent() {
         if (contentGrid == null || !ready) return;
 
-        render();
+        if (!hidden) render();
         contentGrid.cleanUp();
         contentGrid.flush();
     }
@@ -146,9 +228,9 @@ public abstract class Component {
     }
 
     public void updateBorder() {
-        if (!ready()) return;
+        if (!ready || hidden) return;
 
-        border().ifPresent(b -> fullGrid().ifPresent(c -> {
+        border().ifPresent(b -> fullGrid().ifPresent(c ->  {
             c.drawBorder(b);
             c.flush();
         }));

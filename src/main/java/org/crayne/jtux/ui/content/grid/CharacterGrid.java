@@ -5,10 +5,10 @@ import org.crayne.jtux.text.color.ansi.TextColor;
 import org.crayne.jtux.text.color.ansi.TextColorBuilder;
 import org.crayne.jtux.text.component.Text;
 import org.crayne.jtux.text.component.TextPart;
-import org.crayne.jtux.text.util.TextUtil;
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.border.BorderCharacter;
 import org.crayne.jtux.ui.border.Title;
+import org.crayne.jtux.ui.content.layout.Alignment;
 import org.crayne.jtux.util.math.vec.Vec2i;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -112,6 +112,11 @@ public abstract class CharacterGrid {
     }
 
     public abstract void clear();
+
+    public void clearAndFlush() {
+        clear();
+        flush();
+    }
 
     public void putString(@NotNull final Vec2i coord, @NotNull final String str) {
         if (coord.x() >= width() || coord.y() >= height() || coord.x() < 0 || coord.y() < 0) return;
@@ -309,7 +314,7 @@ public abstract class CharacterGrid {
         final int titleWidth = titleText.text().length();
         final float titleAlignment = title.alignment();
 
-        final int leftBorderWidth = TextUtil.align(titleText.text(), topEdgeWidth, titleAlignment);
+        final int leftBorderWidth = Alignment.align(titleText.text(), topEdgeWidth, titleAlignment);
         final int rightBorderWidth = topEdgeWidth - leftBorderWidth - titleWidth;
 
         fillLine(Vec2i.of(1, coordY), borderChar, leftBorderWidth);

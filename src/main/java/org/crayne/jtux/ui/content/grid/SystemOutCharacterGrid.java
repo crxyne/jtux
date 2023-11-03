@@ -6,8 +6,4 @@ public class SystemOutCharacterGrid extends AnsiCharacterGrid {
         super(System.out);
     }
 
-    public void clear() {
-        out().print("\33[H\33[J");
-    }
-
 }

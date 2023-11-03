@@ -146,7 +146,8 @@ public class AnsiCharacterGrid extends CharacterGrid {
     }
 
     public void clear() {
-        for (int y = 0; y < height(); y++) super.writeLineFast(Vec2i.of(0, y), " ".repeat(width()));
+        final int width = width(), height = height();
+        for (int y = 0; y < height; y++) super.writeLineFast(Vec2i.of(0, y), TextUtil.blank(width - 1));
     }
 
     public void putStringRaw(@NotNull final Vec2i coord, @NotNull final String str) {
