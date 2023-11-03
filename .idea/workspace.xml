@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="rewrote ansi cleanup &amp; refactoring">
+    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="changed Component to Text and made it immutable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationContent.java" afterDir="false" />
@@ -130,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698969586863</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="changed Component to Text and made it immutable">
+      <created>1699018669929</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1699018669929</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,6 +155,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="example" />
     <MESSAGE value="rewrote ansi cleanup &amp; refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="rewrote ansi cleanup &amp; refactoring" />
+    <MESSAGE value="changed Component to Text and made it immutable" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed Component to Text and made it immutable" />
   </component>
 </project>

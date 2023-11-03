@@ -4,7 +4,10 @@ import org.crayne.jtux.text.color.Color;
 import org.crayne.jtux.text.color.ansi.TextColor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Text {
@@ -79,50 +82,53 @@ public class Text {
     @NotNull
     public Text prepend(@NotNull final Text comp) {
         final List<TextPart> parts = new ArrayList<>(this.parts);
+        parts.addAll(0, comp.parts);
         return new Text(parts);
     }
 
     @NotNull
     public Text append(@NotNull final TextPart part) {
         final List<TextPart> parts = new ArrayList<>(this.parts);
+        parts.add(part);
         return new Text(parts);
     }
 
     @NotNull
     public Text append(@NotNull final TextColor part) {
         final List<TextPart> parts = new ArrayList<>(this.parts);
+        parts.add(new TextPart(part, null));
         return new Text(parts);
     }
 
     @NotNull
     public Text append(@NotNull final String plain) {
         final List<TextPart> parts = new ArrayList<>(this.parts);
+        parts.add(TextPart.of(plain));
         return new Text(parts);
     }
 
     @NotNull
     public Text append(@NotNull final Text comp) {
         final List<TextPart> parts = new ArrayList<>(this.parts);
-        return new Text(parts);
+        parts.addAll(comp.parts);
+        return this;
     }
 
     @NotNull
     public Text replace(@NotNull final String find, @NotNull final String replace) {
         final List<TextPart> replaced = parts.stream().map(c -> new TextPart(c.color().orElse(null), c.text().replace(find, replace))).toList();
-        final List<TextPart> parts = new ArrayList<>(replaced);
-        return new Text(parts);
+        return new Text(replaced);
     }
 
     @NotNull
     public Text replaceAll(@NotNull final String regex, @NotNull final String replace) {
         final List<TextPart> replaced = parts.stream().map(c -> new TextPart(c.color().orElse(null), c.text().replaceAll(regex, replace))).toList();
-        final List<TextPart> parts = new ArrayList<>(replaced);
-        return new Text(parts);
+        return new Text(replaced);
     }
 
     @NotNull
     public List<TextPart> parts() {
-        return Collections.unmodifiableList(parts);
+        return parts;
     }
 
     public boolean isEmpty() {
