@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class ComponentPart {
+public class TextPart {
 
     @Nullable
     private TextColor color;
@@ -15,34 +15,34 @@ public class ComponentPart {
     @NotNull
     private final String text;
 
-    public ComponentPart(@Nullable final TextColor color, @Nullable final String text) {
+    public TextPart(@Nullable final TextColor color, @Nullable final String text) {
         this.color = color;
         this.text = text == null ? "" : text;
     }
 
     @NotNull
-    public static ComponentPart empty() {
-        return new ComponentPart(null, null);
+    public static TextPart empty() {
+        return new TextPart(null, null);
     }
 
     @NotNull
-    public static ComponentPart of(@NotNull final String text) {
-        return new ComponentPart(null, text);
+    public static TextPart of(@NotNull final String text) {
+        return new TextPart(null, text);
     }
 
     @NotNull
-    public static ComponentPart of(@Nullable final TextColor color, @NotNull final String text) {
-        return new ComponentPart(color, text);
+    public static TextPart of(@Nullable final TextColor color, @NotNull final String text) {
+        return new TextPart(color, text);
     }
 
     @NotNull
-    public static ComponentPart of(@NotNull final Color color, @NotNull final String text) {
+    public static TextPart of(@NotNull final Color color, @NotNull final String text) {
         return of(color, text, true);
     }
 
     @NotNull
-    public static ComponentPart of(@NotNull final Color color, @NotNull final String text, final boolean foreground) {
-        return new ComponentPart(foreground ? TextColor.foreground(color) : TextColor.background(color), text);
+    public static TextPart of(@NotNull final Color color, @NotNull final String text, final boolean foreground) {
+        return new TextPart(foreground ? TextColor.foreground(color) : TextColor.background(color), text);
     }
 
     public boolean invisible() {
@@ -60,14 +60,14 @@ public class ComponentPart {
     }
 
     @NotNull
-    public ComponentPart color(@Nullable final TextColor color) {
+    public TextPart color(@Nullable final TextColor color) {
         this.color = color;
         return this;
     }
 
     @NotNull
-    public ComponentPart createCopy() {
-        return new ComponentPart(color, text);
+    public TextPart createCopy() {
+        return new TextPart(color, text);
     }
 
     @NotNull

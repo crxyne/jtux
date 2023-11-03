@@ -2,7 +2,7 @@ package org.crayne.jtux.text.color;
 
 import org.crayne.jtux.text.color.space.HSV;
 import org.crayne.jtux.text.color.space.RGB;
-import org.crayne.jtux.text.component.Component;
+import org.crayne.jtux.text.component.Text;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -183,12 +183,12 @@ public class Color {
     }
 
     @NotNull
-    public Component stylize(@NotNull final String text, final boolean foreground) {
-        return Component.text(this, text, foreground);
+    public Text stylize(@NotNull final String text, final boolean foreground) {
+        return Text.text(this, text, foreground);
     }
 
     @NotNull
-    public Component stylize(final char character, final boolean foreground) {
+    public Text stylize(final char character, final boolean foreground) {
         return stylize("" + character, foreground);
     }
 

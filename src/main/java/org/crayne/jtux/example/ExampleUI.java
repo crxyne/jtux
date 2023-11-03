@@ -6,8 +6,8 @@ import org.crayne.jtux.event.keyboard.KeyListener;
 import org.crayne.jtux.event.window.WindowEvent;
 import org.crayne.jtux.event.window.WindowListener;
 import org.crayne.jtux.text.color.Color;
-import org.crayne.jtux.text.component.Component;
-import org.crayne.jtux.text.component.TextUtil;
+import org.crayne.jtux.text.component.Text;
+import org.crayne.jtux.text.util.TextUtil;
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.border.BorderDefault;
 import org.crayne.jtux.ui.panel.ContainerPanel;
@@ -102,7 +102,7 @@ public class ExampleUI {
     }
 
     @NotNull
-    public static Component createGradientText(@NotNull final String title) {
+    public static Text createGradientText(@NotNull final String title) {
         final Color color = Color.randomColor();
         return TextUtil.colorizeGradient(title, List.of(color, color.complementary()), true);
     }
@@ -113,7 +113,7 @@ public class ExampleUI {
     }
 
     @NotNull
-    public static Component createGradientText(@NotNull final Color color, @NotNull final String title) {
+    public static Text createGradientText(@NotNull final Color color, @NotNull final String title) {
         return TextUtil.colorizeGradient(title, List.of(color, color.complementary()), true);
     }
 

@@ -9,23 +9,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="example">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/type/EmptyContent.java" afterDir="false" />
+    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="rewrote ansi cleanup &amp; refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/GlobalEventManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/GlobalEventManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/SimpleTextRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/SimpleTextContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/AbstractPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/AbstractPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/ContainerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/ContainerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/ContentPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/ContentPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/Content.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/ContentRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/Content.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/grid/AnsiCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/grid/CharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/grid/SystemOutCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/SystemOutCharacterGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/content/type/EmptyContentRenderer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/SimpleTextContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/SimpleTextContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/Text.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/ComponentBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/TextBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/ComponentPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/TextPart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/TextUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/util/TextUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/title/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/title/Title.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698941760188</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="rewrote ansi cleanup &amp; refactoring">
+      <created>1698969586863</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698969586863</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,6 +147,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="example" />
-    <option name="LAST_COMMIT_MESSAGE" value="example" />
+    <MESSAGE value="rewrote ansi cleanup &amp; refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="rewrote ansi cleanup &amp; refactoring" />
   </component>
 </project>

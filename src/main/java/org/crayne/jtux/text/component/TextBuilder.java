@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ComponentBuilder {
+public class TextBuilder {
 
     @NotNull
     private TextColorBuilder textColorBuilder;
@@ -19,15 +19,15 @@ public class ComponentBuilder {
     private String text;
 
     @NotNull
-    private final List<ComponentPart> parts;
+    private final List<TextPart> parts;
 
-    public ComponentBuilder() {
+    public TextBuilder() {
         textColorBuilder = new TextColorBuilder();
         textColorBuilder.reset(true);
         parts = new ArrayList<>();
     }
 
-    protected ComponentBuilder(@NotNull final List<ComponentPart> parts) {
+    protected TextBuilder(@NotNull final List<TextPart> parts) {
         this();
         this.parts.addAll(parts);
     }
@@ -44,69 +44,69 @@ public class ComponentBuilder {
     }
 
     @NotNull
-    public ComponentBuilder foreground(@Nullable final Color fg) {
+    public TextBuilder foreground(@Nullable final Color fg) {
         textColorBuilder.foreground(fg);
         textColorBuilder.reset(false);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder background(@Nullable final Color bg) {
+    public TextBuilder background(@Nullable final Color bg) {
         textColorBuilder.background(bg);
         textColorBuilder.reset(false);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder reset(final boolean b) {
+    public TextBuilder reset(final boolean b) {
         textColorBuilder.reset(b);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder bold(final boolean b) {
+    public TextBuilder bold(final boolean b) {
         textColorBuilder.bold(b);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder dim(final boolean b) {
+    public TextBuilder dim(final boolean b) {
         textColorBuilder.dim(b);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder italic(final boolean b) {
+    public TextBuilder italic(final boolean b) {
         textColorBuilder.italic(b);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder underline(final boolean b) {
+    public TextBuilder underline(final boolean b) {
         textColorBuilder.underline(b);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder blinking(final boolean b) {
+    public TextBuilder blinking(final boolean b) {
         textColorBuilder.blinking(b);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder inverted(final boolean b) {
+    public TextBuilder inverted(final boolean b) {
         textColorBuilder.inverted(b);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder hidden(final boolean b) {
+    public TextBuilder hidden(final boolean b) {
         textColorBuilder.hidden(b);
         return this;
     }
 
     @NotNull
-    public ComponentBuilder strikethrough(final boolean b) {
+    public TextBuilder strikethrough(final boolean b) {
         textColorBuilder.strikethrough(b);
         return this;
     }
@@ -163,17 +163,17 @@ public class ComponentBuilder {
     }
 
     @NotNull
-    public static ComponentBuilder builder(@NotNull final String text) {
+    public static TextBuilder builder(@NotNull final String text) {
         return builder().text(text);
     }
 
     @NotNull
-    public static ComponentBuilder builder() {
-        return new ComponentBuilder();
+    public static TextBuilder builder() {
+        return new TextBuilder();
     }
 
     @NotNull
-    public ComponentBuilder text(@Nullable final String text) {
+    public TextBuilder text(@Nullable final String text) {
         this.text = text;
         return this;
     }
@@ -184,22 +184,22 @@ public class ComponentBuilder {
     }
 
     @NotNull
-    public ComponentPart buildPart() {
-        return new ComponentPart(color(), text);
+    public TextPart buildPart() {
+        return new TextPart(color(), text);
     }
 
     @NotNull
-    public ComponentBuilder next() {
-        final ComponentPart part = buildPart();
+    public TextBuilder next() {
+        final TextPart part = buildPart();
         if (!part.invisible()) parts.add(part);
         clearCurrent();
         return this;
     }
 
     @NotNull
-    public Component build() {
+    public Text build() {
         next();
-        final Component result = Component.text(parts);
+        final Text result = Text.text(parts);
         clearAll();
         return result;
     }

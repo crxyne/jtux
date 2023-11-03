@@ -1,6 +1,7 @@
 package org.crayne.jtux.ui.content.grid;
 
 import org.crayne.jtux.text.color.ansi.TextColor;
+import org.crayne.jtux.text.util.TextUtil;
 import org.crayne.jtux.util.math.vec.Vec2i;
 import org.jetbrains.annotations.NotNull;
 
@@ -93,14 +94,9 @@ public class AnsiCharacterGrid extends CharacterGrid {
         return containedWithin.map(Vec2i::y).orElse(-1);
     }
 
-    @NotNull
-    private static String blank(final int amount) {
-        return " ".repeat(amount);
-    }
-
     private void clearLine(final int x, final int y, final int amount) {
         // super because we do not want this coordinate to add to writtenTo
-        super.writeLineFast(Vec2i.of(x, y), blank(amount));
+        super.writeLineFast(Vec2i.of(x, y), TextUtil.blank(amount));
     }
 
     public void cleanUp() {

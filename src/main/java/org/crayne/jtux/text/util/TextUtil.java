@@ -1,6 +1,7 @@
-package org.crayne.jtux.text.component;
+package org.crayne.jtux.text.util;
 
 import org.crayne.jtux.text.color.Color;
+import org.crayne.jtux.text.component.Text;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -10,13 +11,13 @@ public class TextUtil {
     private TextUtil() {}
 
     @NotNull
-    public static Component colorizeGradient(@NotNull final String string, @NotNull final List<Color> colors, final boolean foreground) {
-        if (colors.isEmpty() || string.isBlank()) return Component.text(string);
+    public static Text colorizeGradient(@NotNull final String string, @NotNull final List<Color> colors, final boolean foreground) {
+        if (colors.isEmpty() || string.isBlank()) return Text.text(string);
         if (colors.size() == 1) return colors.get(0).stylize(string, foreground);
         final int length = string.length();
         final int colorsAmount = colors.size();
 
-        Component result = Component.text("");
+        Text result = Text.text("");
         final int flagColors = colorsAmount - 1;
         final int individualStringLength = (length + (length % flagColors)) / flagColors;
 
@@ -31,6 +32,11 @@ public class TextUtil {
             }
         }
         return result;
+    }
+
+    @NotNull
+    public static String blank(final int amount) {
+        return " ".repeat(amount);
     }
 
 }

@@ -3,8 +3,8 @@ package org.crayne.jtux.ui.content.grid;
 import org.crayne.jtux.text.color.Color;
 import org.crayne.jtux.text.color.ansi.TextColor;
 import org.crayne.jtux.text.color.ansi.TextColorBuilder;
-import org.crayne.jtux.text.component.Component;
-import org.crayne.jtux.text.component.ComponentPart;
+import org.crayne.jtux.text.component.Text;
+import org.crayne.jtux.text.component.TextPart;
 import org.crayne.jtux.util.math.vec.Vec2i;
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.border.BorderCharacter;
@@ -149,9 +149,9 @@ public abstract class CharacterGrid {
         return endX;
     }
 
-    public void writeLine(@NotNull final Vec2i coord, @NotNull final Component component) {
+    public void writeLine(@NotNull final Vec2i coord, @NotNull final Text text) {
         int offset = 0;
-        for (final ComponentPart part : component.parts())  {
+        for (final TextPart part : text.parts())  {
             final int length = part.text().length();
             if (length == 0) continue;
 
@@ -161,21 +161,21 @@ public abstract class CharacterGrid {
         resetTextColor();
     }
 
-    public void writeLine(@NotNull final Vec2i coord, @NotNull final Component component, final boolean wrap) {
+    public void writeLine(@NotNull final Vec2i coord, @NotNull final Text text, final boolean wrap) {
         if (wrap) {
-            writeLineWrap(coord, component);
+            writeLineWrap(coord, text);
             return;
         }
-        writeLine(coord, component);
+        writeLine(coord, text);
     }
 
-    public int writeLineWrap(@NotNull final Vec2i coord, @NotNull final Component component) {
+    public int writeLineWrap(@NotNull final Vec2i coord, @NotNull final Text component) {
         int offsetX = 0, offsetY = 0;
         final int width = width(), height = height();
         int coordX = coord.x();
         final int coordY = coord.y();
 
-        for (final ComponentPart part : component.parts())  {
+        for (final TextPart part : component.parts())  {
             String text = part.text();
             if (text.length() == 0) continue;
 
@@ -202,9 +202,9 @@ public abstract class CharacterGrid {
         return offsetY;
     }
 
-    public void writeLine(@NotNull final Vec2i coord, @NotNull final ComponentPart componentPart) {
-        componentPart.color().ifPresent(this::textColor);
-        writeLineFast(coord, componentPart.text());
+    public void writeLine(@NotNull final Vec2i coord, @NotNull final TextPart textPart) {
+        textPart.color().ifPresent(this::textColor);
+        writeLineFast(coord, textPart.text());
     }
 
     public int fillLine(@NotNull final Vec2i coord,
@@ -304,7 +304,7 @@ public abstract class CharacterGrid {
             fillLine(Vec2i.of(1, coordY), borderChar, topEdgeWidth);
             return;
         }
-        final Component titleText = title.title();
+        final Text titleText = title.title();
         final int titleWidth = titleText.text().length();
         final float titleAlignment = title.alignment();
 
