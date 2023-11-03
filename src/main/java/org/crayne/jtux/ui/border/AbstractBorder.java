@@ -1,6 +1,5 @@
 package org.crayne.jtux.ui.border;
 
-import org.crayne.jtux.ui.title.Title;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;

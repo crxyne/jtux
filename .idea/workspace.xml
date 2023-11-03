@@ -10,18 +10,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="changed Component to Text and made it immutable">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/RenderOrder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/GlobalEventManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/JTuxEventBus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/keyboard/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/keyboard/KeyListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/SimpleTextContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/SimpleTextContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/Color.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/Text.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/ComponentBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/TextBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/ComponentPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/TextPart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/component/TextUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/util/TextUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/InformationContent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/SimpleTextContent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/util/TextUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/util/TextUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/AbstractBorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/AbstractBorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/Border.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/Border.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/Content.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/title/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/title/Title.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/type/EmptyContent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/AbstractPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/ContainerPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/ContentPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/panel/PanelOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/title/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/Title.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/title/TitleAlignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Alignment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +95,20 @@
       <recent name="org.crayne.jtux.util.lib" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.crayne.jtux.Main" />
+      <module name="jtux" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.crayne.jtux.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Unnamed" type="ShConfigurationType" nameIsGenerated="true">
       <option name="SCRIPT_TEXT" value="" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
@@ -99,6 +124,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -137,7 +167,28 @@
       <option name="project" value="LOCAL" />
       <updated>1699018669929</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="changed Component to Text and made it immutable">
+      <created>1699018780672</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699018780672</updated>
+    </task>
+    <task id="LOCAL-00006" summary="changed Component to Text and made it immutable">
+      <created>1699018798551</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699018798551</updated>
+    </task>
+    <task id="LOCAL-00007" summary="changed Component to Text and made it immutable">
+      <created>1699018820619</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1699018820619</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

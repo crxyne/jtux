@@ -5,10 +5,11 @@ import org.crayne.jtux.text.color.ansi.TextColor;
 import org.crayne.jtux.text.color.ansi.TextColorBuilder;
 import org.crayne.jtux.text.component.Text;
 import org.crayne.jtux.text.component.TextPart;
-import org.crayne.jtux.util.math.vec.Vec2i;
+import org.crayne.jtux.text.util.TextUtil;
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.border.BorderCharacter;
-import org.crayne.jtux.ui.title.Title;
+import org.crayne.jtux.ui.border.Title;
+import org.crayne.jtux.util.math.vec.Vec2i;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -308,7 +309,7 @@ public abstract class CharacterGrid {
         final int titleWidth = titleText.text().length();
         final float titleAlignment = title.alignment();
 
-        final int leftBorderWidth = (int) Math.max(0, topEdgeWidth * titleAlignment - titleWidth * titleAlignment);
+        final int leftBorderWidth = TextUtil.align(titleText.text(), topEdgeWidth, titleAlignment);
         final int rightBorderWidth = topEdgeWidth - leftBorderWidth - titleWidth;
 
         fillLine(Vec2i.of(1, coordY), borderChar, leftBorderWidth);

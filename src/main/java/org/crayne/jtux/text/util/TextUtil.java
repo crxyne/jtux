@@ -34,6 +34,12 @@ public class TextUtil {
         return result;
     }
 
+    public static int align(@NotNull final String string, final int width, final float alignment) {
+        if (alignment < 0.0f || alignment > 1.0f) throw new IllegalArgumentException("Alignment must be between 0 and 1 (inclusive)");
+        if (width <= 0) throw new IllegalArgumentException("Width must be positive");
+        return (int) Math.min(width - string.length(), Math.max(0, width * alignment - string.length() * alignment));
+    }
+
     @NotNull
     public static String blank(final int amount) {
         return " ".repeat(amount);

@@ -1,6 +1,6 @@
 package org.crayne.jtux.util.lib;
 
-import org.crayne.jtux.event.GlobalEventManager;
+import org.crayne.jtux.event.JTuxEventBus;
 import org.crayne.jtux.event.keyboard.KeyEvent;
 import org.crayne.jtux.event.keyboard.KeyEventType;
 import org.crayne.jtux.event.keyboard.Keycode;
@@ -18,7 +18,7 @@ public class JTuxLibrary {
     public static void init(@NotNull final File nativeLibrary) {
         System.load(nativeLibrary.getAbsolutePath());
         NativeJTuxLibrary.init();
-        GlobalEventManager.INSTANCE.start();
+        JTuxEventBus.INSTANCE.start();
         JTuxLibrary.cursorVisible(false);
 
         Runtime.getRuntime().addShutdownHook(new Thread(JTuxLibrary::shutdown));
@@ -26,7 +26,7 @@ public class JTuxLibrary {
 
     public static void shutdown() {
         NativeJTuxLibrary.shutdown();
-        GlobalEventManager.INSTANCE.shutdown();
+        JTuxEventBus.INSTANCE.shutdown();
         cursorVisible(true);
     }
 

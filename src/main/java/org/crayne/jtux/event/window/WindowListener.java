@@ -1,6 +1,6 @@
 package org.crayne.jtux.event.window;
 
-import org.crayne.jtux.event.GlobalEventManager;
+import org.crayne.jtux.event.JTuxEventBus;
 import org.crayne.jtux.util.lib.JTuxLibrary;
 import org.crayne.jtux.util.math.MathUtil;
 import org.jetbrains.annotations.NotNull;
@@ -27,11 +27,11 @@ public interface WindowListener extends Consumer<WindowEvent> {
     }
 
     default void start() {
-        GlobalEventManager.INSTANCE.newWindowListener(this);
+        JTuxEventBus.INSTANCE.newWindowListener(this);
     }
 
     default void close() {
-        GlobalEventManager.INSTANCE.closeWindowListener(this);
+        JTuxEventBus.INSTANCE.closeWindowListener(this);
     }
 
 }

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class GlobalEventManager extends Thread {
+public class JTuxEventBus extends Thread {
 
     @NotNull
     private final Set<KeyListener> subscribedKeyListeners;
@@ -25,17 +25,15 @@ public class GlobalEventManager extends Thread {
     private int previousTerminalWidth, previousTerminalHeight;
 
     private volatile boolean active;
-    private volatile boolean taskLock;
 
     @NotNull
     private final List<Runnable> tasksSynchronized;
 
     @NotNull
-    public static final GlobalEventManager INSTANCE = new GlobalEventManager();
+    public static final JTuxEventBus INSTANCE = new JTuxEventBus();
 
-    private GlobalEventManager() {
+    private JTuxEventBus() {
         active = false;
-        taskLock = false;
         previousTerminalWidth = -1;
         previousTerminalHeight = -1;
         subscribedKeyListeners = Collections.synchronizedSet(new HashSet<>());
@@ -54,13 +52,13 @@ public class GlobalEventManager extends Thread {
         }).start();
 
         while (active) {
-            handleWindowEvent();
+            synchronized (subscribedKeyListeners) {
+                handleWindowEvent();
 
-            synchronized (tasksSynchronized) {
-                taskLock = true;
-                tasksSynchronized.forEach(Runnable::run);
-                tasksSynchronized.clear();
-                taskLock = false;
+                synchronized (tasksSynchronized) {
+                    tasksSynchronized.forEach(Runnable::run);
+                    tasksSynchronized.clear();
+                }
             }
         }
     }
@@ -116,11 +114,9 @@ public class GlobalEventManager extends Thread {
                 event.character().orElse(null),
                 event.pressType());
 
-        scheduleSyncTaskForced(() -> {
-            synchronized (subscribedKeyListeners) {
-                subscribedKeyListeners.forEach(k -> k.accept(event));
-            }
-        });
+        synchronized (subscribedKeyListeners) {
+            subscribedKeyListeners.forEach(k -> k.accept(event));
+        }
 
         if (event.keyDown()) heldDown.add(event.keycode());
     }
@@ -150,32 +146,9 @@ public class GlobalEventManager extends Thread {
         }
     }
 
-    public void pushSynchronizedTask(@NotNull final Runnable runnable) throws ConcurrentModificationException {
-        synchronized (tasksSynchronized) {
-            if (taskLock) throw new ConcurrentModificationException();
-            tasksSynchronized.add(runnable);
-        }
-    }
-
-    public void forcePushSynchronizedTask(@NotNull final Runnable runnable) {
+    public void scheduleSyncTask(@NotNull final Runnable runnable) {
         synchronized (tasksSynchronized) {
             tasksSynchronized.add(runnable);
-        }
-    }
-
-    public static void scheduleSyncTask(@NotNull final Runnable runnable) throws ConcurrentModificationException {
-        GlobalEventManager.INSTANCE.pushSynchronizedTask(runnable);
-    }
-
-    public static void scheduleSyncTaskForced(@NotNull final Runnable runnable) {
-        GlobalEventManager.INSTANCE.forcePushSynchronizedTask(runnable);
-    }
-
-    public static void scheduleSyncTaskCancellable(@NotNull final Runnable runnable) {
-        try {
-            scheduleSyncTask(runnable);
-        } catch (final ConcurrentModificationException ignored) {
-
         }
     }
 

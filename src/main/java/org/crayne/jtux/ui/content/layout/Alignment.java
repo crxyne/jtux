@@ -1,6 +1,6 @@
-package org.crayne.jtux.ui.title;
+package org.crayne.jtux.ui.content.layout;
 
-public enum TitleAlignment {
+public enum Alignment {
 
     LEFT(0.0f),
     CENTER(0.5f),
@@ -8,7 +8,7 @@ public enum TitleAlignment {
 
     private final float floatValue;
 
-    TitleAlignment(final float floatValue) {
+    Alignment(final float floatValue) {
         this.floatValue = floatValue;
     }
 

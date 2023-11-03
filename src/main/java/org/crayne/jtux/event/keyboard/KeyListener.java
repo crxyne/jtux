@@ -1,6 +1,6 @@
 package org.crayne.jtux.event.keyboard;
 
-import org.crayne.jtux.event.GlobalEventManager;
+import org.crayne.jtux.event.JTuxEventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -13,11 +13,11 @@ public interface KeyListener extends Consumer<KeyEvent> {
     }
 
     default void start() {
-        GlobalEventManager.INSTANCE.newKeyListener(this);
+        JTuxEventBus.INSTANCE.newKeyListener(this);
     }
 
     default void close() {
-        GlobalEventManager.INSTANCE.closeKeyListener(this);
+        JTuxEventBus.INSTANCE.closeKeyListener(this);
     }
 
 }

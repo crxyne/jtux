@@ -1,6 +1,5 @@
 package org.crayne.jtux.example;
 
-import org.crayne.jtux.event.GlobalEventManager;
 import org.crayne.jtux.event.keyboard.KeyEvent;
 import org.crayne.jtux.event.keyboard.KeyListener;
 import org.crayne.jtux.event.window.WindowEvent;
@@ -10,66 +9,39 @@ import org.crayne.jtux.text.component.Text;
 import org.crayne.jtux.text.util.TextUtil;
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.border.BorderDefault;
-import org.crayne.jtux.ui.panel.ContainerPanel;
-import org.crayne.jtux.ui.panel.ContentPanel;
-import org.crayne.jtux.ui.panel.PanelOrder;
+import org.crayne.jtux.ui.border.Title;
 import org.crayne.jtux.ui.content.grid.CharacterGrid;
-import org.crayne.jtux.ui.title.Title;
+import org.crayne.jtux.ui.content.layout.Component;
+import org.crayne.jtux.ui.content.layout.Container;
+import org.crayne.jtux.ui.content.layout.RenderOrder;
 import org.crayne.jtux.util.lib.JTuxLibrary;
 import org.crayne.jtux.util.math.vec.Vec2f;
+import org.crayne.jtux.util.math.vec.Vec2i;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class ExampleUI {
 
-    private int totalUpdates;
-
-    private final long startedAt;
-
     @NotNull
-    private final ContainerPanel parent;
-
-    @NotNull
-    private final ContentPanel informationPanel;
+    private final Container parent;
 
     public ExampleUI() {
-        this.totalUpdates = 0;
-        this.startedAt = System.currentTimeMillis();
-
-        parent = ContainerPanel.of(createBorder(BorderDefault.NORMAL,
+        parent = new Container(null, Vec2f.unary(), createBorder(BorderDefault.NORMAL,
                 "i am the outer panel (this is the top title)",
                 "i am the outer panel (this is the bottom title)"),
-                Vec2f.unary(), PanelOrder.LEFT_TO_RIGHT);
+                RenderOrder.LEFT_TO_RIGHT);
 
-        parent.fullCharacterGrid(JTuxLibrary.out);
+        parent.fullGrid(JTuxLibrary.out);
 
-        parent.createPanel(createBorder(BorderDefault.NONE, "i am content panel 1"), new SimpleTextContent(
-                createGradientText(Color.randomColor(),
-                        "i am a wrapping text. if i don't have enough space on one line," +
-                                " i will use the space on the next line instead."
-                ), true)
-        );
-        parent.createPanel(createBorder(BorderDefault.NONE, "i am content panel 2"), new SimpleTextContent(
-                createGradientText(Color.randomColor(),
-                        "i am not a wrapping text. if i don't have enough space on one " +
-                                "line, my text will be cut off."
-                ), false)
-        );
-
-        final ContainerPanel innerContainer = parent.createContainer(createBorder(BorderDefault.DOUBLE,
-                "i am a container"), PanelOrder.TOP_TO_BOTTOM);
-
-        informationPanel = innerContainer.createPanel(createBorder(BorderDefault.NORMAL, "i am an inner panel, panel 3"),
-                Vec2f.of(1.0f, 0.75f), new InformationContent(this));
-
-        innerContainer.createPanel(createBorder(BorderDefault.NORMAL, "i am an inner panel, panel 4"),
-                Vec2f.of(1.0f, 0.25f));
+        parent.addComponent(new Component(parent, Vec2f.unary(), createBorder(BorderDefault.NONE, "i am content panel 1")) {
+            public void render() {
+                final Optional<CharacterGrid> grid = contentGrid();
+                grid.ifPresent(g -> g.writeLine(Vec2i.origin(), "hello, world!"));
+            }
+        });
     }
 
     public void start() {
@@ -78,9 +50,6 @@ public class ExampleUI {
 
         keyListener.start();
         windowListener.start();
-
-        final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(() -> GlobalEventManager.scheduleSyncTaskCancellable(informationPanel.content()::fullUpdate), 1, 1, TimeUnit.MILLISECONDS);
     }
 
     private void exit(@NotNull final KeyEvent event) {
@@ -89,16 +58,15 @@ public class ExampleUI {
     }
 
     private void handleWindowEvent(@NotNull final WindowEvent event) {
-        totalUpdates++;
         final int width = event.terminalWidth(), height = event.terminalHeight();
-        final Optional<CharacterGrid> characterGrid = parent.fullCharacterGrid();
+        final Optional<CharacterGrid> characterGrid = parent.fullGrid();
 
         if (characterGrid.isEmpty()) return;
         if (event.windowSizeUpdated()) characterGrid.get().clear();
 
-        parent.updateSize(width, height);
+        parent.updateFullSize(width, height);
         parent.updateChildrenSizes();
-        parent.ready(true);
+        parent.makeReady();
     }
 
     @NotNull
@@ -137,14 +105,6 @@ public class ExampleUI {
     @NotNull
     public static AbstractBorder createBorder(@NotNull final BorderDefault type, @Nullable final String topTitle) {
         return createBorder(type, topTitle, null);
-    }
-
-    public int totalUpdates() {
-        return totalUpdates;
-    }
-
-    public long startedAt() {
-        return startedAt;
     }
 
 }
