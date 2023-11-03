@@ -108,7 +108,7 @@ public class Text {
     public Text append(@NotNull final Text comp) {
         final List<TextPart> parts = new ArrayList<>(this.parts);
         parts.addAll(comp.parts);
-        return this;
+        return new Text(parts);
     }
 
     @NotNull
