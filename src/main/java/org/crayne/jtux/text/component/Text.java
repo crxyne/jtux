@@ -4,10 +4,7 @@ import org.crayne.jtux.text.color.Color;
 import org.crayne.jtux.text.color.ansi.TextColor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Text {
@@ -128,7 +125,7 @@ public class Text {
 
     @NotNull
     public List<TextPart> parts() {
-        return parts;
+        return Collections.unmodifiableList(parts);
     }
 
     public boolean isEmpty() {
