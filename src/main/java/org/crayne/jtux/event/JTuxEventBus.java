@@ -6,7 +6,6 @@ import org.crayne.jtux.event.keyboard.Keycode;
 import org.crayne.jtux.event.window.WindowEvent;
 import org.crayne.jtux.event.window.WindowListener;
 import org.crayne.jtux.util.lib.JTuxLibrary;
-import org.crayne.jtux.util.math.MathUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -64,29 +63,25 @@ public class JTuxEventBus extends Thread {
     }
 
     @NotNull
-    private static WindowEvent createWindowEvent(final int rawTerminalWidth, final int rawTerminalHeight,
+    private static WindowEvent createWindowEvent(final int terminalWidth, final int terminalHeight,
                                                  final int previousTerminalWidth, final int previousTerminalHeight,
                                                  final boolean forcedUpdate, final boolean initialUpdate) {
-        final int terminalWidth = MathUtil.forceEven(rawTerminalWidth);
-        final int terminalHeight = MathUtil.forceEven(rawTerminalHeight);
-
         return new WindowEvent(
-                rawTerminalWidth, rawTerminalHeight,
-                previousTerminalWidth, previousTerminalHeight,
                 terminalWidth, terminalHeight,
+                previousTerminalWidth, previousTerminalHeight,
                 forcedUpdate, initialUpdate
         );
     }
 
     public void initialWindowUpdate(@NotNull final WindowListener listener) {
-        listener.accept(createWindowEvent(JTuxLibrary.rawTerminalWidth(), JTuxLibrary.rawTerminalHeight(),
+        listener.accept(createWindowEvent(JTuxLibrary.terminalWidth(), JTuxLibrary.terminalHeight(),
                 -1, -1,
                 true, true));
     }
 
     private void handleWindowEvent() {
-        final int rawTerminalWidth = JTuxLibrary.rawTerminalWidth();
-        final int rawTerminalHeight = JTuxLibrary.rawTerminalHeight();
+        final int rawTerminalWidth = JTuxLibrary.terminalWidth();
+        final int rawTerminalHeight = JTuxLibrary.terminalHeight();
 
         final boolean widthChanged = rawTerminalWidth != previousTerminalWidth;
         final boolean heightChanged = rawTerminalHeight != previousTerminalHeight;

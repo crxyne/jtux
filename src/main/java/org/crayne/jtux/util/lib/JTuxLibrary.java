@@ -4,7 +4,6 @@ import org.crayne.jtux.event.JTuxEventBus;
 import org.crayne.jtux.event.keyboard.KeyEvent;
 import org.crayne.jtux.event.keyboard.KeyEventType;
 import org.crayne.jtux.event.keyboard.Keycode;
-import org.crayne.jtux.util.math.MathUtil;
 import org.crayne.jtux.ui.content.grid.SystemOutCharacterGrid;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,11 +14,29 @@ public class JTuxLibrary {
 
     private JTuxLibrary() {}
 
+    public static class ExceptionHandler implements Thread.UncaughtExceptionHandler {
+        public void uncaughtException(@NotNull final Thread t, @NotNull final Throwable e) {
+            handle(e);
+        }
+
+        public void handle(@NotNull final Throwable t) {
+            JTuxEventBus.INSTANCE.shutdown();
+            out.clear();
+            out.printStackTrace(t);
+        }
+
+        public static void registerExceptionHandler() {
+            Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
+        }
+
+    }
+
     public static void init(@NotNull final File nativeLibrary) {
         System.load(nativeLibrary.getAbsolutePath());
         NativeJTuxLibrary.init();
         JTuxEventBus.INSTANCE.start();
         JTuxLibrary.cursorVisible(false);
+        ExceptionHandler.registerExceptionHandler();
 
         Runtime.getRuntime().addShutdownHook(new Thread(JTuxLibrary::shutdown));
     }
@@ -33,28 +50,12 @@ public class JTuxLibrary {
     @NotNull
     public static final SystemOutCharacterGrid out = new SystemOutCharacterGrid();
 
-    public static int rawTerminalWidth() {
+    public static int terminalWidth() {
         return NativeJTuxLibrary.terminalWidth();
     }
 
-    public static int terminalWidth() {
-        return MathUtil.forceEven(rawTerminalWidth());
-    }
-
-    public static int fullTerminalWidth() {
-        return MathUtil.forceOdd(rawTerminalWidth());
-    }
-
-    public static int rawTerminalHeight() {
-        return NativeJTuxLibrary.terminalHeight();
-    }
-
     public static int terminalHeight() {
-        return MathUtil.forceEven(rawTerminalHeight());
-    }
-
-    public static int fullTerminalHeight() {
-        return MathUtil.forceOdd(rawTerminalHeight());
+        return NativeJTuxLibrary.terminalHeight();
     }
 
     public static void cursorVisible(final boolean b) {

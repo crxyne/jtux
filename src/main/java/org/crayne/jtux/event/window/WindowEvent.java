@@ -4,22 +4,18 @@ import org.jetbrains.annotations.NotNull;
 
 public class WindowEvent {
 
-    private final int rawTerminalWidth, rawTerminalHeight,
-            previousTerminalWidth, previousTerminalHeight,
-            terminalWidth, terminalHeight;
+    private final int terminalWidth, terminalHeight,
+            previousTerminalWidth, previousTerminalHeight;
 
     private final boolean forcedUpdate, initialUpdate;
 
-    public WindowEvent(final int rawTerminalWidth, final int rawTerminalHeight,
+    public WindowEvent(final int terminalWidth, final int terminalHeight,
                        final int previousTerminalWidth, final int previousTerminalHeight,
-                       final int terminalWidth, final int terminalHeight,
                        final boolean forcedUpdate, final boolean initialUpdate) {
-        this.rawTerminalWidth = rawTerminalWidth;
-        this.rawTerminalHeight = rawTerminalHeight;
-        this.previousTerminalWidth = previousTerminalWidth;
-        this.previousTerminalHeight = previousTerminalHeight;
         this.terminalWidth = terminalWidth;
         this.terminalHeight = terminalHeight;
+        this.previousTerminalWidth = previousTerminalWidth;
+        this.previousTerminalHeight = previousTerminalHeight;
 
         this.forcedUpdate = forcedUpdate;
         this.initialUpdate = initialUpdate;
@@ -27,7 +23,7 @@ public class WindowEvent {
 
     public boolean windowSizeUpdated() {
         if (forcedUpdate && !initialUpdate) return false;
-        return initialUpdate || rawTerminalHeight != previousTerminalHeight || rawTerminalWidth != previousTerminalWidth;
+        return initialUpdate || terminalHeight != previousTerminalHeight || terminalWidth != previousTerminalWidth;
     }
 
     public boolean forcedUpdate() {
@@ -46,14 +42,6 @@ public class WindowEvent {
         return terminalWidth;
     }
 
-    public int rawTerminalHeight() {
-        return rawTerminalHeight;
-    }
-
-    public int rawTerminalWidth() {
-        return rawTerminalWidth;
-    }
-
     public int previousTerminalHeight() {
         return previousTerminalHeight;
     }
@@ -65,12 +53,10 @@ public class WindowEvent {
     @NotNull
     public String toString() {
         return "WindowEvent{" +
-                "rawTerminalWidth=" + rawTerminalWidth +
-                ", rawTerminalHeight=" + rawTerminalHeight +
+                "terminalWidth=" + terminalWidth +
+                ", terminalHeight=" + terminalHeight +
                 ", previousTerminalWidth=" + previousTerminalWidth +
                 ", previousTerminalHeight=" + previousTerminalHeight +
-                ", terminalWidth=" + terminalWidth +
-                ", terminalHeight=" + terminalHeight +
                 ", forcedUpdate=" + forcedUpdate +
                 ", initialUpdate=" + initialUpdate +
                 '}';

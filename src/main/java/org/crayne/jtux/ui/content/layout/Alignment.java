@@ -36,7 +36,7 @@ public enum Alignment {
 
     public static int align(final int objectWidth, final int usableWidth, final float alignment) {
         if (alignment < 0.0f || alignment > 1.0f) throw new IllegalArgumentException("Alignment must be between 0 and 1 (inclusive)");
-        if (usableWidth <= 0) throw new IllegalArgumentException("Width must be positive");
+        if (usableWidth < 0) throw new IllegalArgumentException("Width must be >= 0");
 
         return (int) Math.min(usableWidth - objectWidth, Math.max(0, usableWidth * alignment - objectWidth * alignment));
     }

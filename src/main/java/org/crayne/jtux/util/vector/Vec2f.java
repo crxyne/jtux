@@ -1,4 +1,4 @@
-package org.crayne.jtux.util.math.vec;
+package org.crayne.jtux.util.vector;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,6 +33,12 @@ public class Vec2f implements Vec2<Float> {
     @NotNull
     public static Vec2f unary() {
         return new Vec2f(1.0f, 1.0f);
+    }
+
+    @NotNull
+    public Vec2f swap() {
+        //noinspection SuspiciousNameCombination
+        return new Vec2f(y, x);
     }
 
     @NotNull

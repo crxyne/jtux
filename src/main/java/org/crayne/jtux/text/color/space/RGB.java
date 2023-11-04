@@ -1,7 +1,7 @@
 package org.crayne.jtux.text.color.space;
 
 import org.crayne.jtux.text.color.Color;
-import org.crayne.jtux.util.math.vec.BoundedVec3;
+import org.crayne.jtux.util.vector.BoundedVec3;
 import org.jetbrains.annotations.NotNull;
 
 public class RGB extends BoundedVec3<Integer> {

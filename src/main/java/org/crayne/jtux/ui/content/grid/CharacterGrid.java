@@ -9,10 +9,13 @@ import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.border.BorderCharacter;
 import org.crayne.jtux.ui.border.Title;
 import org.crayne.jtux.ui.content.layout.Alignment;
-import org.crayne.jtux.util.math.vec.Vec2i;
+import org.crayne.jtux.util.vector.Vec2i;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 
 public abstract class CharacterGrid {
@@ -100,7 +103,7 @@ public abstract class CharacterGrid {
     public abstract void resetTextColor();
 
     public void putCharacter(@NotNull final Vec2i coord, final char character) {
-        if (coord.x() >= width() || coord.y() >= height()) return;
+        if (coord.x() >= width() || coord.y() >= height() || coord.x() < 0 || coord.y() < 0) return;
         putCharacterRaw(coord.add(offsetX(), offsetY()), character);
     }
 
@@ -109,6 +112,25 @@ public abstract class CharacterGrid {
     public void clearCharacter(@NotNull final Vec2i coord) {
         resetTextColor();
         putCharacter(coord, ' ');
+    }
+
+    public int printStackTrace(@NotNull final Throwable t) {
+        return printStackTrace(Vec2i.origin(), t);
+    }
+
+    public int printStackTrace(@NotNull final Vec2i coord, @NotNull final Throwable t) {
+        writeLineWrap(coord, Text.text(t.toString()));
+        return printStackTrace(coord.add(0, 1), t.getStackTrace());
+    }
+
+    public int printStackTrace(@NotNull final Vec2i coord, @NotNull final StackTraceElement[] elements) {
+        final List<Text> elementsText = Arrays.stream(elements)
+                .map(StackTraceElement::toString)
+                .map(s -> "\tat " + s)
+                .map(Text::text)
+                .toList();
+
+        return writeLinesWrap(coord, elementsText);
     }
 
     public abstract void clear();
@@ -175,23 +197,34 @@ public abstract class CharacterGrid {
         writeLine(coord, text);
     }
 
-    public int writeLineWrap(@NotNull final Vec2i coord, @NotNull final Text component) {
+    public int writeLinesWrap(@NotNull final Vec2i coord, @NotNull final Collection<Text> texts) {
+        final int coordX = coord.x();
+        int coordY = coord.y();
+
+        for (final Text text : texts) {
+            final int newOffset = writeLineWrap(Vec2i.of(coordX, coordY), text);
+            coordY += newOffset + 1;
+        }
+        return coordY;
+    }
+
+    public int writeLineWrap(@NotNull final Vec2i coord, @NotNull final Text text) {
         int offsetX = 0, offsetY = 0;
         final int width = width(), height = height();
         int coordX = coord.x();
         final int coordY = coord.y();
 
-        for (final TextPart part : component.parts())  {
-            String text = part.text();
-            if (text.length() == 0) continue;
+        for (final TextPart part : text.parts())  {
+            String partText = part.text();
+            if (partText.length() == 0) continue;
 
             part.color().ifPresent(this::textColor);
 
-            while (offsetX + coordX + text.length() > width) {
-                final String toPrint = text.substring(0, width - offsetX - coordX);
+            while (offsetX + coordX + partText.length() > width) {
+                final String toPrint = partText.substring(0, width - offsetX - coordX);
                 if (!toPrint.isEmpty()) writeLineFast(Vec2i.of(coordX + offsetX, coordY + offsetY), toPrint);
 
-                text = text.substring(toPrint.length());
+                partText = partText.substring(toPrint.length());
                 offsetY++;
                 offsetX = 0;
                 coordX = 0;
@@ -201,8 +234,8 @@ public abstract class CharacterGrid {
                     return offsetY;
                 }
             }
-            if (!text.isEmpty()) writeLineFast(Vec2i.of(coordX + offsetX, coordY + offsetY), text);
-            offsetX += text.length();
+            if (!partText.isEmpty()) writeLineFast(Vec2i.of(coordX + offsetX, coordY + offsetY), partText);
+            offsetX += partText.length();
         }
         resetTextColor();
         return offsetY;
@@ -305,6 +338,7 @@ public abstract class CharacterGrid {
         textColor(borderCharacter.color());
         final char borderChar = borderCharacter.character();
         final int topEdgeWidth = width() - 2;
+        if (topEdgeWidth <= 0) return;
 
         if (title == null) {
             fillLine(Vec2i.of(1, coordY), borderChar, topEdgeWidth);
@@ -328,10 +362,10 @@ public abstract class CharacterGrid {
     }
 
     public void drawEdges(@NotNull final AbstractBorder border) {
-        drawTopEdge(border);
         drawBottomEdge(border);
-        drawLeftEdge(border);
+        drawTopEdge(border);
         drawRightEdge(border);
+        drawLeftEdge(border);
     }
 
     public void drawBorder(@NotNull final AbstractBorder border) {

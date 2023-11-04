@@ -1,7 +1,6 @@
 package org.crayne.jtux.ui.content.layout;
 
 import org.crayne.jtux.ui.border.AbstractBorder;
-import org.crayne.jtux.util.math.vec.Vec2f;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.ToDoubleFunction;
 
 public class Container extends Component {
 
@@ -19,18 +17,30 @@ public class Container extends Component {
     @NotNull
     private final RenderOrder order;
 
-    public Container(@NotNull final Vec2f format, @Nullable final AbstractBorder border,
+    public Container(final float sizeProportion, final float sizePercentage, @Nullable final AbstractBorder border,
                      @NotNull final RenderOrder order) {
-        super(format, border);
+        super(sizeProportion, sizePercentage, border);
         this.order = order;
         this.components = new ArrayList<>();
     }
 
-    public Container(@NotNull final Vec2f format, @Nullable final AbstractBorder border,
+    public Container(final float sizeProportion, final float sizePercentage, @Nullable final AbstractBorder border,
                      @NotNull final RenderOrder order, @NotNull final Collection<Component> components) {
-        super(format, border);
+        super(sizeProportion, sizePercentage, border);
         this.order = order;
         this.components = new ArrayList<>(components);
+    }
+
+    public Container(@Nullable final AbstractBorder border, @NotNull final RenderOrder order) {
+        super(border);
+        this.order = order;
+        this.components = new ArrayList<>();
+    }
+
+    public Container(@NotNull final RenderOrder order) {
+        super();
+        this.order = order;
+        this.components = new ArrayList<>();
     }
 
     public void makeReady() {
@@ -64,20 +74,21 @@ public class Container extends Component {
 
     private void updateChildrenSizes(final boolean useY, final int usableWidth, final int usableHeight) {
         int totalUsedSpace = 0;
-        final int usableSpace = useY ? usableHeight : usableWidth;
-        final int otherUsableSpace = useY ? usableWidth : usableHeight;
+        final int usableSpace      = useY ? usableHeight : usableWidth;
+        final int otherUsableSpace = useY ? usableWidth  : usableHeight;
 
-        final ToDoubleFunction<Vec2f> componentFunction = useY ? Vec2f::y : Vec2f::x;
-        final ToDoubleFunction<Vec2f> otherComponentFunction = useY ? Vec2f::x : Vec2f::y;
-
-        final double maxRatio = components.stream().map(Component::format).mapToDouble(componentFunction).sum();
+        final double proportionTotal = components.stream().mapToDouble(Component::sizeProportion).sum();
 
         for (int i = 0; i < components.size(); i++) {
             final Component component = components.get(i);
             final boolean last = i + 1 == components.size();
 
-            final double spaceRatio = componentFunction.applyAsDouble(component.format()) / maxRatio;
-            final double otherSpaceModifier = Math.min(1.0f, otherComponentFunction.applyAsDouble(component.format()));
+            final double spaceRatio = component.sizeProportion() / proportionTotal;
+            if (spaceRatio == 0.0f) continue;
+
+            final double otherSpaceModifier = Math.min(1.0f, component.sizePercentage());
+            if (otherSpaceModifier == 0.0f) continue;
+
             final float alignment = component.alignment();
 
             final int usedSpace = last ? usableSpace - totalUsedSpace : (int) (spaceRatio * usableSpace);

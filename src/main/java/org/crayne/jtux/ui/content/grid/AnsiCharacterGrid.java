@@ -2,7 +2,7 @@ package org.crayne.jtux.ui.content.grid;
 
 import org.crayne.jtux.text.color.ansi.TextColor;
 import org.crayne.jtux.text.util.TextUtil;
-import org.crayne.jtux.util.math.vec.Vec2i;
+import org.crayne.jtux.util.vector.Vec2i;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.PrintStream;

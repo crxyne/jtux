@@ -36,7 +36,7 @@ public class TextUtil {
 
     @NotNull
     public static String blank(final int amount) {
-        return " ".repeat(amount);
+        return " ".repeat(Math.max(0, amount));
     }
 
 }

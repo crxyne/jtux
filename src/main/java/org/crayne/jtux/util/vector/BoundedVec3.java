@@ -1,4 +1,4 @@
-package org.crayne.jtux.util.math.vec;
+package org.crayne.jtux.util.vector;
 
 import org.jetbrains.annotations.NotNull;
 

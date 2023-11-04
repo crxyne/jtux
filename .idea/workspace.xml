@@ -9,13 +9,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="rewrote alignments and now allowing components to specify their alignment inside of a container">
+    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="optimized resizes and fixed bug with newly introduced alignments + format (garbage was not properly cleared off the screen when resizing the window, atleast at places that were not covered with a content grid)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/JTuxEventBus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/JTuxEventBus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/space/HSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/space/HSV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/space/RGB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/space/RGB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/util/TextUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/util/TextUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Alignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Alignment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/MathUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/vec/BoundedVec3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/vector/BoundedVec3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/vec/Vec2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/vector/Vec2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/vec/Vec2f.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/vector/Vec2f.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/math/vec/Vec2i.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/vector/Vec2i.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699043669989</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="optimized resizes and fixed bug with newly introduced alignments + format (garbage was not properly cleared off the screen when resizing the window, atleast at places that were not covered with a content grid)">
+      <created>1699045799024</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1699045799024</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,6 +225,7 @@
     <MESSAGE value="changed Component to Text and made it immutable" />
     <MESSAGE value="refactoring &amp; getting stuff ready for more complicated panels (input fields, aligned text, log panels, etc)" />
     <MESSAGE value="rewrote alignments and now allowing components to specify their alignment inside of a container" />
-    <option name="LAST_COMMIT_MESSAGE" value="rewrote alignments and now allowing components to specify their alignment inside of a container" />
+    <MESSAGE value="optimized resizes and fixed bug with newly introduced alignments + format (garbage was not properly cleared off the screen when resizing the window, atleast at places that were not covered with a content grid)" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimized resizes and fixed bug with newly introduced alignments + format (garbage was not properly cleared off the screen when resizing the window, atleast at places that were not covered with a content grid)" />
   </component>
 </project>

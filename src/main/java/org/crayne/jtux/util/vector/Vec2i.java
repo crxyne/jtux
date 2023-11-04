@@ -1,4 +1,4 @@
-package org.crayne.jtux.util.math.vec;
+package org.crayne.jtux.util.vector;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,8 +36,14 @@ public class Vec2i implements Vec2<Integer> {
     }
 
     @NotNull
+    public Vec2i swap() {
+        //noinspection SuspiciousNameCombination
+        return new Vec2i(y, x);
+    }
+
+    @NotNull
     public String toString() {
-        return "Vec2f{" +
+        return "Vec2i{" +
                 "x=" + x +
                 ", y=" + y +
                 '}';

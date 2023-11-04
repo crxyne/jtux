@@ -2,7 +2,6 @@ package org.crayne.jtux.ui.content.layout;
 
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.content.grid.CharacterGrid;
-import org.crayne.jtux.util.math.vec.Vec2f;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,10 +18,7 @@ public abstract class Component {
     @Nullable
     private Container parent;
 
-    @NotNull
-    private final Vec2f format;
-
-    private final float alignment;
+    private final float sizeProportion, sizePercentage, alignment;
 
     @Nullable
     private AbstractBorder border;
@@ -31,11 +27,12 @@ public abstract class Component {
 
     private boolean hidden;
 
-    public Component(@NotNull final Vec2f format, final float alignment, @Nullable final AbstractBorder border, final boolean hidden) {
-        if (format.x() < 0 || format.y() < 0) throw new IllegalArgumentException("Component format cannot have negative components");
+    public Component(final float sizeProportion, final float sizePercentage, final float alignment, @Nullable final AbstractBorder border, final boolean hidden) {
+        if (sizeProportion < 0 || sizePercentage < 0) throw new IllegalArgumentException("Component format cannot have negative components");
         if (alignment < 0.0f || alignment > 1.0f) throw new IllegalArgumentException("Component alignment must be between 0 and 1");
 
-        this.format = format;
+        this.sizeProportion = sizeProportion;
+        this.sizePercentage = sizePercentage;
         this.alignment = alignment;
         this.border = border;
         this.contentGrid = null;
@@ -44,44 +41,44 @@ public abstract class Component {
         this.hidden = hidden;
     }
 
-    public Component(@NotNull final Vec2f format, final boolean hidden) {
-        this(format, Alignment.PRIMARY.floatValue(), null, hidden);
+    public Component(final float sizeProportion, final float sizePercentage, final boolean hidden) {
+        this(sizeProportion, sizePercentage, Alignment.PRIMARY.floatValue(), null, hidden);
     }
 
-    public Component(@NotNull final Vec2f format, final float alignment, final boolean hidden) {
-        this(format, alignment, null, hidden);
+    public Component(final float sizeProportion, final float sizePercentage, final float alignment, final boolean hidden) {
+        this(sizeProportion, sizePercentage, alignment, null, hidden);
     }
 
-    public Component(@NotNull final Vec2f format, @NotNull final Alignment alignment, final boolean hidden) {
-        this(format, alignment.floatValue(), null, hidden);
+    public Component(final float sizeProportion, final float sizePercentage, @NotNull final Alignment alignment, final boolean hidden) {
+        this(sizeProportion, sizePercentage, alignment.floatValue(), null, hidden);
     }
 
-    public Component(@NotNull final Vec2f format, @Nullable final AbstractBorder border) {
-        this(format, Alignment.PRIMARY.floatValue(), border, false);
+    public Component(final float sizeProportion, final float sizePercentage, @Nullable final AbstractBorder border) {
+        this(sizeProportion, sizePercentage, Alignment.PRIMARY.floatValue(), border, false);
     }
 
-    public Component(@NotNull final Vec2f format, final float alignment, @Nullable final AbstractBorder border) {
-        this(format, alignment, border, false);
+    public Component(final float sizeProportion, final float sizePercentage, final float alignment, @Nullable final AbstractBorder border) {
+        this(sizeProportion, sizePercentage, alignment, border, false);
     }
 
-    public Component(@NotNull final Vec2f format, @NotNull final Alignment alignment, @Nullable final AbstractBorder border) {
-        this(format, alignment.floatValue(), border, false);
+    public Component(final float sizeProportion, final float sizePercentage, @NotNull final Alignment alignment, @Nullable final AbstractBorder border) {
+        this(sizeProportion, sizePercentage, alignment.floatValue(), border, false);
     }
 
-    public Component(@NotNull final Vec2f format) {
-        this(format, false);
+    public Component(final float sizeProportion, final float sizePercentage) {
+        this(sizeProportion, sizePercentage, false);
     }
 
-    public Component(@NotNull final Vec2f format, final float alignment) {
-        this(format, alignment, false);
+    public Component(final float sizeProportion, final float sizePercentage, final float alignment) {
+        this(sizeProportion, sizePercentage, alignment, false);
     }
 
-    public Component(@NotNull final Vec2f format, @NotNull final Alignment alignment) {
-        this(format, alignment.floatValue(), false);
+    public Component(final float sizeProportion, final float sizePercentage, @NotNull final Alignment alignment) {
+        this(sizeProportion, sizePercentage, alignment.floatValue(), false);
     }
 
     public Component(@Nullable final AbstractBorder border, final boolean hidden) {
-        this(Vec2f.unary(), Alignment.PRIMARY.floatValue(), border, hidden);
+        this(1.0f, 1.0f, Alignment.PRIMARY.floatValue(), border, hidden);
     }
 
     public Component(@Nullable final AbstractBorder border) {
@@ -89,7 +86,7 @@ public abstract class Component {
     }
 
     public Component(final boolean hidden) {
-        this(Vec2f.unary(), hidden);
+        this(1.0f, 1.0f, hidden);
     }
 
     public Component() {
@@ -139,9 +136,12 @@ public abstract class Component {
         this.border = border;
     }
 
-    @NotNull
-    public Vec2f format() {
-        return format;
+    public float sizePercentage() {
+        return sizePercentage;
+    }
+
+    public float sizeProportion() {
+        return sizeProportion;
     }
 
     public float alignment() {
