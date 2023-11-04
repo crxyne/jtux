@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Objects;
 
+@SuppressWarnings("UnusedReturnValue")
 public class BorderBuilder {
 
     private final BorderCharacter @NotNull [] characters;

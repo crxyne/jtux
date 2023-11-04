@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
+@SuppressWarnings("UnusedReturnValue")
 public class TextColorBuilder {
 
     @Nullable

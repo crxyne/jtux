@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
+@SuppressWarnings("UnusedReturnValue")
 public abstract class CharacterGrid {
 
     private int width, height, offsetX, offsetY;

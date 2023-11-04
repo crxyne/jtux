@@ -74,13 +74,13 @@ public class RGB extends BoundedVec3<Integer> {
     }
 
     public void checkBounds(@NotNull final Integer x, @NotNull final Integer y, @NotNull final Integer z) {
-        checkIntegerBounds(x, y, z, 0, 255);
+        checkIntegerBounds(x, y, z);
     }
 
-    private static void checkIntegerBounds(final int r, final int g, final int b, final int min, final int max) {
-        checkIntegerComponentBounds(r, "Red",   min, max);
-        checkIntegerComponentBounds(g, "Green", min, max);
-        checkIntegerComponentBounds(b, "Blue",  min, max);
+    private static void checkIntegerBounds(final int r, final int g, final int b) {
+        checkIntegerComponentBounds(r, "Red", 0, 255);
+        checkIntegerComponentBounds(g, "Green", 0, 255);
+        checkIntegerComponentBounds(b, "Blue", 0, 255);
     }
 
     @NotNull
