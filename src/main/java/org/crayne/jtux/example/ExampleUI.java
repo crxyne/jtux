@@ -29,7 +29,7 @@ public class ExampleUI {
     private final Container parent;
 
     @NotNull
-    private final Component component, component2;
+    private final Component component;
 
     public ExampleUI() {
         parent = new Container(createBorder(BorderDefault.NORMAL,
@@ -39,7 +39,7 @@ public class ExampleUI {
 
         parent.fullGrid(JTuxLibrary.out);
 
-        component2 = parent.addComponent(new Component(3.0f, 0.8f, createBorder(BorderDefault.NORMAL, "i am content panel 1")) {
+        @NotNull Component component2 = parent.addComponent(new Component(3.0f, 0.8f, createBorder(BorderDefault.NORMAL, "i am content panel 1")) {
 
             @NotNull
             private final List<Text> lines = Stream.of("a",
@@ -79,6 +79,8 @@ public class ExampleUI {
                 grid.ifPresent(g -> g.writeLinesWrap(Vec2i.of(0, -scroll), lines));
             }
         });
+
+        parent.addSpacerComponent(0.5f);
 
         component = parent.addComponent(new Component(1.0f, 1.0f, createBorder(BorderDefault.NORMAL, "i am content panel 2")) {
             public void render() {

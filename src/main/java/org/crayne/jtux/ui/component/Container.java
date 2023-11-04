@@ -67,6 +67,22 @@ public class Container extends Component {
         return Collections.unmodifiableSet(hiddenComponents);
     }
 
+    public void addSpacerComponentSilent(final int index, final float sizeProportion) {
+        addComponentSilent(index, new EmptyComponent(sizeProportion));
+    }
+
+    public void addSpacerComponentSilent(final float sizeProportion) {
+        addComponentSilent(new EmptyComponent(sizeProportion));
+    }
+
+    public void addSpacerComponent(final int index, final float sizeProportion) {
+        addComponent(index, new EmptyComponent(sizeProportion));
+    }
+
+    public void addSpacerComponent(final float sizeProportion) {
+        addComponent(new EmptyComponent(sizeProportion));
+    }
+
     @NotNull
     public Component addComponentSilent(@NotNull final Component component) {
         return addComponentSilent(components.size(), component);
@@ -108,13 +124,13 @@ public class Container extends Component {
     }
 
     public void hideComponent(@NotNull final Component component) {
-        hiddenComponents.add(component);
+        hideComponentSilent(component);
         updateChildrenSizes();
         update();
     }
 
     public void showComponent(@NotNull final Component component) {
-        hiddenComponents.remove(component);
+        showComponentSilent(component);
         updateChildrenSizes();
         update();
     }
@@ -122,6 +138,19 @@ public class Container extends Component {
     public void componentHidden(@NotNull final Component component, final boolean hidden) {
         if (hidden) hideComponent(component);
         else showComponent(component);
+    }
+
+    public void hideComponentSilent(@NotNull final Component component) {
+        hiddenComponents.add(component);
+    }
+
+    public void showComponentSilent(@NotNull final Component component) {
+        hiddenComponents.remove(component);
+    }
+
+    public void componentHiddenSilent(@NotNull final Component component, final boolean hidden) {
+        if (hidden) hideComponentSilent(component);
+        else showComponentSilent(component);
     }
 
     public boolean componentHidden(@NotNull final Component component) {
