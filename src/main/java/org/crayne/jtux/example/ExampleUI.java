@@ -64,7 +64,10 @@ public class ExampleUI {
     private void handleKeyEvent(@NotNull final KeyEvent event) {
         if (!event.keyDown()) return;
         switch (event.keycode()) {
-            case V -> component.hidden(!component.hidden());
+            case V -> {
+                component.hidden(!component.hidden());
+                parent.componentHidden(component, component.hidden());
+            }
             case C -> {
                 JTuxLibrary.shutdown();
                 System.exit(0);

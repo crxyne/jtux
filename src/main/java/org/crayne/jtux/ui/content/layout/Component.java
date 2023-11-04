@@ -27,7 +27,8 @@ public abstract class Component {
 
     private boolean hidden;
 
-    public Component(final float sizeProportion, final float sizePercentage, final float alignment, @Nullable final AbstractBorder border, final boolean hidden) {
+    public Component(final float sizeProportion, final float sizePercentage, final float alignment,
+                     @Nullable final AbstractBorder border, final boolean hidden) {
         if (sizeProportion < 0 || sizePercentage < 0) throw new IllegalArgumentException("Component format cannot have negative components");
         if (alignment < 0.0f || alignment > 1.0f) throw new IllegalArgumentException("Component alignment must be between 0 and 1");
 
@@ -108,7 +109,7 @@ public abstract class Component {
         update();
     }
 
-    protected void parent(@NotNull final Container parent) {
+    protected void parent(@Nullable final Container parent) {
         this.parent = parent;
     }
 
@@ -188,6 +189,7 @@ public abstract class Component {
         if (contentGrid == null || !ready) return;
 
         if (!hidden) render();
+        fullGrid().ifPresent(CharacterGrid::cleanUp);
         contentGrid.cleanUp();
         contentGrid.flush();
     }

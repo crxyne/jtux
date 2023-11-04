@@ -9,13 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="removed MathUtil, stopped forcing the terminal window to have an even size (obsolete and useless to do now), changed Component#format to Component#sizePercentage and Component#sizeProportion for easier understanding and use &amp; made unhandled exceptions more readable by printing them through the SystemOutCharacterGrid">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/window/WindowEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/ansi/TextColorBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/ansi/TextColorBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/space/RGB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/text/color/space/RGB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" afterDir="false" />
+    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="fixed unused return value warnings and converted BorderCharacter as well as WindowEvent to records">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +41,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2XXIk7EjLCJyMTFjjupPgzznxub" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -199,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699107991067</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fixed unused return value warnings and converted BorderCharacter as well as WindowEvent to records">
+      <created>1699108154181</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1699108154181</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -222,6 +231,7 @@
     <MESSAGE value="rewrote alignments and now allowing components to specify their alignment inside of a container" />
     <MESSAGE value="optimized resizes and fixed bug with newly introduced alignments + format (garbage was not properly cleared off the screen when resizing the window, atleast at places that were not covered with a content grid)" />
     <MESSAGE value="removed MathUtil, stopped forcing the terminal window to have an even size (obsolete and useless to do now), changed Component#format to Component#sizePercentage and Component#sizeProportion for easier understanding and use &amp; made unhandled exceptions more readable by printing them through the SystemOutCharacterGrid" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed MathUtil, stopped forcing the terminal window to have an even size (obsolete and useless to do now), changed Component#format to Component#sizePercentage and Component#sizeProportion for easier understanding and use &amp; made unhandled exceptions more readable by printing them through the SystemOutCharacterGrid" />
+    <MESSAGE value="fixed unused return value warnings and converted BorderCharacter as well as WindowEvent to records" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed unused return value warnings and converted BorderCharacter as well as WindowEvent to records" />
   </component>
 </project>

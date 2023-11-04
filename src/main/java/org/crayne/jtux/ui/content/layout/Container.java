@@ -4,15 +4,16 @@ import org.crayne.jtux.ui.border.AbstractBorder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
+@SuppressWarnings("UnusedReturnValue")
 public class Container extends Component {
 
     @NotNull
     private final List<Component> components;
+
+    @NotNull
+    private final Set<Component> hiddenComponents;
 
     @NotNull
     private final RenderOrder order;
@@ -22,6 +23,7 @@ public class Container extends Component {
         super(sizeProportion, sizePercentage, border);
         this.order = order;
         this.components = new ArrayList<>();
+        this.hiddenComponents = new HashSet<>();
     }
 
     public Container(final float sizeProportion, final float sizePercentage, @Nullable final AbstractBorder border,
@@ -29,18 +31,21 @@ public class Container extends Component {
         super(sizeProportion, sizePercentage, border);
         this.order = order;
         this.components = new ArrayList<>(components);
+        this.hiddenComponents = new HashSet<>();
     }
 
     public Container(@Nullable final AbstractBorder border, @NotNull final RenderOrder order) {
         super(border);
         this.order = order;
         this.components = new ArrayList<>();
+        this.hiddenComponents = new HashSet<>();
     }
 
     public Container(@NotNull final RenderOrder order) {
         super();
         this.order = order;
         this.components = new ArrayList<>();
+        this.hiddenComponents = new HashSet<>();
     }
 
     public void makeReady() {
@@ -55,11 +60,69 @@ public class Container extends Component {
     }
 
     @NotNull
-    public Component addComponent(@NotNull final Component component) {
+    public Set<Component> hiddenComponents() {
+        return Collections.unmodifiableSet(hiddenComponents);
+    }
+
+    @NotNull
+    public Component addComponentSilent(@NotNull final Component component) {
+        return addComponentSilent(components.size(), component);
+    }
+
+    @NotNull
+    public Component addComponentSilent(final int index, @NotNull final Component component) {
         component.parent(this);
-        components.add(component);
-        updateChildrenSizes();
+        components.add(index, component);
         return component;
+    }
+
+    @NotNull
+    public Component addComponent(@NotNull final Component component) {
+        return addComponent(components.size(), component);
+    }
+
+    @NotNull
+    public Component addComponent(final int index, @NotNull final Component component) {
+        addComponentSilent(index, component);
+        updateChildrenSizes();
+        update();
+        return component;
+    }
+
+    @NotNull
+    public Component removeComponent(@NotNull final Component component) {
+        removeComponentSilent(component);
+        updateChildrenSizes();
+        update();
+        return component;
+    }
+
+    @NotNull
+    public Component removeComponentSilent(@NotNull final Component component) {
+        component.parent(null);
+        components.remove(component);
+        return component;
+    }
+
+    public void hideComponent(@NotNull final Component component) {
+        hiddenComponents.add(component);
+        updateChildrenSizes();
+        update();
+    }
+
+    public void showComponent(@NotNull final Component component) {
+        hiddenComponents.remove(component);
+        updateChildrenSizes();
+        update();
+    }
+
+    public void componentHidden(@NotNull final Component component, final boolean hidden) {
+        if (hidden) hideComponent(component);
+        else showComponent(component);
+    }
+
+    public boolean componentHidden(@NotNull final Component component) {
+        return hiddenComponents.contains(component);
     }
 
     public void updateChildrenSizes() {
@@ -81,6 +144,8 @@ public class Container extends Component {
 
         for (int i = 0; i < components.size(); i++) {
             final Component component = components.get(i);
+            if (hiddenComponents.contains(component)) continue;
+
             final boolean last = i + 1 == components.size();
 
             final double spaceRatio = component.sizeProportion() / proportionTotal;
