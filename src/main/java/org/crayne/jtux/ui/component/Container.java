@@ -1,7 +1,9 @@
-package org.crayne.jtux.ui.content.layout;
+package org.crayne.jtux.ui.component;
 
 import org.crayne.jtux.ui.border.AbstractBorder;
-import org.crayne.jtux.ui.content.grid.CharacterGrid;
+import org.crayne.jtux.ui.component.layout.Alignment;
+import org.crayne.jtux.ui.component.layout.ComponentOrder;
+import org.crayne.jtux.ui.grid.CharacterGrid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -141,7 +143,9 @@ public class Container extends Component {
         final int usableSpace      = useY ? usableHeight : usableWidth;
         final int otherUsableSpace = useY ? usableWidth  : usableHeight;
 
-        final double proportionTotal = components.stream().mapToDouble(Component::sizeProportion).sum();
+        final double proportionTotal = components.stream()
+                .filter(c -> !hiddenComponents.contains(c))
+                .mapToDouble(Component::sizeProportion).sum();
 
         for (int i = 0; i < components.size(); i++) {
             final Component component = components.get(i);

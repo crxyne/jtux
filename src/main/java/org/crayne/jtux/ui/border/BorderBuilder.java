@@ -12,7 +12,7 @@ public class BorderBuilder {
     private final BorderCharacter @NotNull [] characters;
 
     @Nullable
-    private Title topTitle, bottomTitle;
+    private BorderTitle topBorderTitle, bottomBorderTitle;
 
     public BorderBuilder() {
         characters = new BorderCharacter[8];
@@ -23,7 +23,7 @@ public class BorderBuilder {
         if (Arrays.stream(characters).anyMatch(Objects::isNull))
             throw new UnsupportedOperationException("Cannot create Border object; Not all border characters were specified.");
 
-        return new Border(topTitle, bottomTitle, characters);
+        return new Border(topBorderTitle, bottomBorderTitle, characters);
     }
 
     @NotNull
@@ -32,24 +32,24 @@ public class BorderBuilder {
     }
 
     @Nullable
-    public Title bottomTitle() {
-        return bottomTitle;
+    public BorderTitle bottomTitle() {
+        return bottomBorderTitle;
     }
 
     @Nullable
-    public Title topTitle() {
-        return topTitle;
+    public BorderTitle topTitle() {
+        return topBorderTitle;
     }
 
     @NotNull
-    public BorderBuilder bottomTitle(@Nullable final Title bottomTitle) {
-        this.bottomTitle = bottomTitle;
+    public BorderBuilder bottomTitle(@Nullable final BorderTitle bottomBorderTitle) {
+        this.bottomBorderTitle = bottomBorderTitle;
         return this;
     }
 
     @NotNull
-    public BorderBuilder topTitle(@Nullable final Title topTitle) {
-        this.topTitle = topTitle;
+    public BorderBuilder topTitle(@Nullable final BorderTitle topBorderTitle) {
+        this.topBorderTitle = topBorderTitle;
         return this;
     }
 

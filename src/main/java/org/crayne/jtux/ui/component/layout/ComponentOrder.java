@@ -1,4 +1,4 @@
-package org.crayne.jtux.ui.content.layout;
+package org.crayne.jtux.ui.component.layout;
 
 public enum ComponentOrder {
 

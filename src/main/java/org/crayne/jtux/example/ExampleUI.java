@@ -9,11 +9,11 @@ import org.crayne.jtux.text.component.Text;
 import org.crayne.jtux.text.util.TextUtil;
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.border.BorderDefault;
-import org.crayne.jtux.ui.border.Title;
-import org.crayne.jtux.ui.content.grid.CharacterGrid;
-import org.crayne.jtux.ui.content.layout.Component;
-import org.crayne.jtux.ui.content.layout.Container;
-import org.crayne.jtux.ui.content.layout.ComponentOrder;
+import org.crayne.jtux.ui.border.BorderTitle;
+import org.crayne.jtux.ui.grid.CharacterGrid;
+import org.crayne.jtux.ui.component.Component;
+import org.crayne.jtux.ui.component.layout.ComponentOrder;
+import org.crayne.jtux.ui.component.Container;
 import org.crayne.jtux.util.lib.JTuxLibrary;
 import org.crayne.jtux.util.vector.Vec2i;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +29,7 @@ public class ExampleUI {
     private final Container parent;
 
     @NotNull
-    private final Component component;
+    private final Component component, component2;
 
     public ExampleUI() {
         parent = new Container(createBorder(BorderDefault.NORMAL,
@@ -39,15 +39,44 @@ public class ExampleUI {
 
         parent.fullGrid(JTuxLibrary.out);
 
-        parent.addComponent(new Component(3.0f, 0.8f, createBorder(BorderDefault.NORMAL, "i am content panel 1")) {
+        component2 = parent.addComponent(new Component(3.0f, 0.8f, createBorder(BorderDefault.NORMAL, "i am content panel 1")) {
+
+            @NotNull
+            private final List<Text> lines = Stream.of("a",
+                    "b",
+                    "c",
+                    "d",
+                    "e",
+                    "f",
+                    "g",
+                    "h",
+                    "i",
+                    "j",
+                    "k",
+                    "l",
+                    "m",
+                    "n",
+                    "o",
+                    "p",
+                    "q",
+                    "r",
+                    "s",
+                    "t"
+            ).map(s -> s.repeat(30 + (int) (Math.random() * 10))).map(Text::text).toList();
+
+            private int scroll = 0;
+
+            public void scrollUp() {
+                scroll--;
+            }
+
+            public void scrollDown() {
+                scroll++;
+            }
+
             public void render() {
                 final Optional<CharacterGrid> grid = contentGrid();
-                grid.ifPresent(g -> g.writeLinesWrap(Vec2i.origin(), Stream.of(
-                        "this is some log output text i think?",
-                        "i have newline support! these lines of text are not drawn on the same line so...",
-                        "well, this is boring",
-                        "/suicide"
-                ).map(Text::text).toList()));
+                grid.ifPresent(g -> g.writeLinesWrap(Vec2i.of(0, -scroll), lines));
             }
         });
 
@@ -99,8 +128,8 @@ public class ExampleUI {
     }
 
     @NotNull
-    public static Title createGradientTitle(@NotNull final String title) {
-        return Title.of(createGradientText(title));
+    public static BorderTitle createGradientTitle(@NotNull final String title) {
+        return BorderTitle.of(createGradientText(title));
     }
 
     @NotNull
@@ -109,8 +138,8 @@ public class ExampleUI {
     }
 
     @NotNull
-    public static Title createGradientTitle(@NotNull final Color color, @NotNull final String title) {
-        return Title.of(createGradientText(color, title));
+    public static BorderTitle createGradientTitle(@NotNull final Color color, @NotNull final String title) {
+        return BorderTitle.of(createGradientText(color, title));
     }
 
     @NotNull

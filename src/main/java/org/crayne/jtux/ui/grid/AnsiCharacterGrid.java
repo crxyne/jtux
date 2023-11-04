@@ -1,4 +1,4 @@
-package org.crayne.jtux.ui.content.grid;
+package org.crayne.jtux.ui.grid;
 
 import org.crayne.jtux.text.color.ansi.TextColor;
 import org.crayne.jtux.text.util.TextUtil;

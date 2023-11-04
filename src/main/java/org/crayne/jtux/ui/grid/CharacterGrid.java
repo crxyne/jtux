@@ -1,4 +1,4 @@
-package org.crayne.jtux.ui.content.grid;
+package org.crayne.jtux.ui.grid;
 
 import org.crayne.jtux.text.color.Color;
 import org.crayne.jtux.text.color.ansi.TextColor;
@@ -7,8 +7,8 @@ import org.crayne.jtux.text.component.Text;
 import org.crayne.jtux.text.component.TextPart;
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.border.BorderCharacter;
-import org.crayne.jtux.ui.border.Title;
-import org.crayne.jtux.ui.content.layout.Alignment;
+import org.crayne.jtux.ui.border.BorderTitle;
+import org.crayne.jtux.ui.component.layout.Alignment;
 import org.crayne.jtux.util.vector.Vec2i;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,6 +40,25 @@ public abstract class CharacterGrid {
         this.height = height;
         this.offsetX = offsetX;
         this.offsetY = offsetY;
+    }
+
+    @NotNull
+    public abstract CharacterGrid createChunk(final int offsetX, final int offsetY, final int width, final int height);
+
+    public abstract void textColor(@NotNull final TextColor color);
+
+    public abstract void resetTextColor();
+
+    public abstract void putCharacterRaw(@NotNull final Vec2i coord, final char character);
+
+    public abstract void putStringRaw(@NotNull final Vec2i coord, @NotNull final String str);
+
+    public abstract void clear();
+
+    public abstract void flush();
+
+    public void cleanUp() {
+
     }
 
     public int width() {
@@ -79,15 +98,6 @@ public abstract class CharacterGrid {
         this.height = height;
     }
 
-    public void cleanUp() {
-
-    }
-
-    public abstract void flush();
-
-    @NotNull
-    public abstract CharacterGrid createChunk(final int offsetX, final int offsetY, final int width, final int height);
-
     @NotNull
     public CharacterGrid createContentGrid(final boolean hasBorder) {
         if (!hasBorder) return createChunk(offsetX(), offsetY(), width(), height());
@@ -99,16 +109,10 @@ public abstract class CharacterGrid {
         textColor(new TextColorBuilder().foreground(foregroundColor).background(backgroundColor).build());
     }
 
-    public abstract void textColor(@NotNull final TextColor color);
-
-    public abstract void resetTextColor();
-
     public void putCharacter(@NotNull final Vec2i coord, final char character) {
         if (coord.x() >= width() || coord.y() >= height() || coord.x() < 0 || coord.y() < 0) return;
         putCharacterRaw(coord.add(offsetX(), offsetY()), character);
     }
-
-    public abstract void putCharacterRaw(@NotNull final Vec2i coord, final char character);
 
     public void clearCharacter(@NotNull final Vec2i coord) {
         resetTextColor();
@@ -134,8 +138,6 @@ public abstract class CharacterGrid {
         return writeLinesWrap(coord, elementsText);
     }
 
-    public abstract void clear();
-
     public void clearAndFlush() {
         clear();
         flush();
@@ -145,8 +147,6 @@ public abstract class CharacterGrid {
         if (coord.x() >= width() || coord.y() >= height() || coord.x() < 0 || coord.y() < 0) return;
         putStringRaw(coord.add(offsetX(), offsetY()), str);
     }
-
-    public abstract void putStringRaw(@NotNull final Vec2i coord, @NotNull final String str);
 
     public void fillLine(@NotNull final Vec2i coord, final char character, final int width) {
         fillLine(coord, i -> character, width);
@@ -335,19 +335,19 @@ public abstract class CharacterGrid {
         drawBottomRightCorner(border);
     }
 
-    public void drawHorizontalEdge(@NotNull final BorderCharacter borderCharacter, @Nullable final Title title, final int coordY) {
+    public void drawHorizontalEdge(@NotNull final BorderCharacter borderCharacter, @Nullable final BorderTitle borderTitle, final int coordY) {
         textColor(borderCharacter.color());
         final char borderChar = borderCharacter.character();
         final int topEdgeWidth = width() - 2;
         if (topEdgeWidth <= 0) return;
 
-        if (title == null) {
+        if (borderTitle == null) {
             fillLine(Vec2i.of(1, coordY), borderChar, topEdgeWidth);
             return;
         }
-        final Text titleText = title.title();
+        final Text titleText = borderTitle.title();
         final int titleWidth = titleText.text().length();
-        final float titleAlignment = title.alignment();
+        final float titleAlignment = borderTitle.alignment();
 
         final int leftBorderWidth = Alignment.align(titleText.text(), topEdgeWidth, titleAlignment);
         final int rightBorderWidth = topEdgeWidth - leftBorderWidth - titleWidth;

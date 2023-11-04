@@ -31,9 +31,9 @@ public interface AbstractBorder {
     BorderCharacter bottomRightCorner();
 
     @NotNull
-    Optional<Title> topTitle();
+    Optional<BorderTitle> topTitle();
 
     @NotNull
-    Optional<Title> bottomTitle();
+    Optional<BorderTitle> bottomTitle();
 
 }

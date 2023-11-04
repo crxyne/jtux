@@ -9,11 +9,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="added component hiding to containers">
+    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="added component hiding to containers &amp; refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/AbstractBorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/AbstractBorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/Border.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/Border.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/border/BorderTitle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/AnsiCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/grid/AnsiCharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/CharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/grid/CharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/grid/SystemOutCharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/grid/SystemOutCharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Alignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/layout/Alignment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/ComponentOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/layout/ComponentOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/content/layout/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699109166207</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added component hiding to containers &amp; refactoring">
+      <created>1699110043076</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1699110043076</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -239,6 +256,7 @@
     <MESSAGE value="removed MathUtil, stopped forcing the terminal window to have an even size (obsolete and useless to do now), changed Component#format to Component#sizePercentage and Component#sizeProportion for easier understanding and use &amp; made unhandled exceptions more readable by printing them through the SystemOutCharacterGrid" />
     <MESSAGE value="fixed unused return value warnings and converted BorderCharacter as well as WindowEvent to records" />
     <MESSAGE value="added component hiding to containers" />
-    <option name="LAST_COMMIT_MESSAGE" value="added component hiding to containers" />
+    <MESSAGE value="added component hiding to containers &amp; refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="added component hiding to containers &amp; refactoring" />
   </component>
 </project>

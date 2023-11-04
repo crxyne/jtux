@@ -11,15 +11,15 @@ public class Border implements AbstractBorder {
     private final BorderCharacter @NotNull [] characters;
 
     @Nullable
-    private final Title topTitle, bottomTitle;
+    private final BorderTitle topBorderTitle, bottomBorderTitle;
 
-    protected Border(@Nullable final Title topTitle,
-                  @Nullable final Title bottomTitle,
+    protected Border(@Nullable final BorderTitle topBorderTitle,
+                  @Nullable final BorderTitle bottomBorderTitle,
                   @NotNull final BorderCharacter @NotNull [] characters) {
 
         this.characters = characters;
-        this.topTitle = topTitle;
-        this.bottomTitle = bottomTitle;
+        this.topBorderTitle = topBorderTitle;
+        this.bottomBorderTitle = bottomBorderTitle;
     }
 
     @NotNull
@@ -63,13 +63,13 @@ public class Border implements AbstractBorder {
     }
 
     @NotNull
-    public Optional<Title> topTitle() {
-        return Optional.ofNullable(topTitle);
+    public Optional<BorderTitle> topTitle() {
+        return Optional.ofNullable(topBorderTitle);
     }
 
     @NotNull
-    public Optional<Title> bottomTitle() {
-        return Optional.ofNullable(bottomTitle);
+    public Optional<BorderTitle> bottomTitle() {
+        return Optional.ofNullable(bottomBorderTitle);
     }
 
 }

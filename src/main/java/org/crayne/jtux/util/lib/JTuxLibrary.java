@@ -4,7 +4,7 @@ import org.crayne.jtux.event.JTuxEventBus;
 import org.crayne.jtux.event.keyboard.KeyEvent;
 import org.crayne.jtux.event.keyboard.KeyEventType;
 import org.crayne.jtux.event.keyboard.Keycode;
-import org.crayne.jtux.ui.content.grid.SystemOutCharacterGrid;
+import org.crayne.jtux.ui.grid.SystemOutCharacterGrid;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
