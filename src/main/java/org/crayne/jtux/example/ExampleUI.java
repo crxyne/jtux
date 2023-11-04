@@ -13,7 +13,7 @@ import org.crayne.jtux.ui.border.Title;
 import org.crayne.jtux.ui.content.grid.CharacterGrid;
 import org.crayne.jtux.ui.content.layout.Component;
 import org.crayne.jtux.ui.content.layout.Container;
-import org.crayne.jtux.ui.content.layout.RenderOrder;
+import org.crayne.jtux.ui.content.layout.ComponentOrder;
 import org.crayne.jtux.util.lib.JTuxLibrary;
 import org.crayne.jtux.util.vector.Vec2i;
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class ExampleUI {
 
@@ -34,18 +35,23 @@ public class ExampleUI {
         parent = new Container(createBorder(BorderDefault.NORMAL,
                 "i am the outer panel (this is the top title)",
                 "i am the outer panel (this is the bottom title)"),
-                RenderOrder.LEFT_TO_RIGHT);
+                ComponentOrder.LEFT_TO_RIGHT);
 
         parent.fullGrid(JTuxLibrary.out);
 
-        component = parent.addComponent(new Component(1.0f, 1.0f, createBorder(BorderDefault.NORMAL, "i am content panel 1")) {
+        parent.addComponent(new Component(3.0f, 0.8f, createBorder(BorderDefault.NORMAL, "i am content panel 1")) {
             public void render() {
                 final Optional<CharacterGrid> grid = contentGrid();
-                grid.ifPresent(g -> g.writeLine(Vec2i.origin(), "hello, world!"));
+                grid.ifPresent(g -> g.writeLinesWrap(Vec2i.origin(), Stream.of(
+                        "this is some log output text i think?",
+                        "i have newline support! these lines of text are not drawn on the same line so...",
+                        "well, this is boring",
+                        "/suicide"
+                ).map(Text::text).toList()));
             }
         });
 
-        parent.addComponent(new Component(3.0f, 0.8f, createBorder(BorderDefault.NORMAL, "i am content panel 2")) {
+        component = parent.addComponent(new Component(1.0f, 1.0f, createBorder(BorderDefault.NORMAL, "i am content panel 2")) {
             public void render() {
                 final Optional<CharacterGrid> grid = contentGrid();
                 grid.ifPresent(g -> g.writeLine(Vec2i.origin(), "hello, world!"));

@@ -189,7 +189,6 @@ public abstract class Component {
         if (contentGrid == null || !ready) return;
 
         if (!hidden) render();
-        fullGrid().ifPresent(CharacterGrid::cleanUp);
         contentGrid.cleanUp();
         contentGrid.flush();
     }

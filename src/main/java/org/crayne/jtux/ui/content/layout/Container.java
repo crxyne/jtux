@@ -1,6 +1,7 @@
 package org.crayne.jtux.ui.content.layout;
 
 import org.crayne.jtux.ui.border.AbstractBorder;
+import org.crayne.jtux.ui.content.grid.CharacterGrid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,10 +17,10 @@ public class Container extends Component {
     private final Set<Component> hiddenComponents;
 
     @NotNull
-    private final RenderOrder order;
+    private final ComponentOrder order;
 
     public Container(final float sizeProportion, final float sizePercentage, @Nullable final AbstractBorder border,
-                     @NotNull final RenderOrder order) {
+                     @NotNull final ComponentOrder order) {
         super(sizeProportion, sizePercentage, border);
         this.order = order;
         this.components = new ArrayList<>();
@@ -27,21 +28,21 @@ public class Container extends Component {
     }
 
     public Container(final float sizeProportion, final float sizePercentage, @Nullable final AbstractBorder border,
-                     @NotNull final RenderOrder order, @NotNull final Collection<Component> components) {
+                     @NotNull final ComponentOrder order, @NotNull final Collection<Component> components) {
         super(sizeProportion, sizePercentage, border);
         this.order = order;
         this.components = new ArrayList<>(components);
         this.hiddenComponents = new HashSet<>();
     }
 
-    public Container(@Nullable final AbstractBorder border, @NotNull final RenderOrder order) {
+    public Container(@Nullable final AbstractBorder border, @NotNull final ComponentOrder order) {
         super(border);
         this.order = order;
         this.components = new ArrayList<>();
         this.hiddenComponents = new HashSet<>();
     }
 
-    public Container(@NotNull final RenderOrder order) {
+    public Container(@NotNull final ComponentOrder order) {
         super();
         this.order = order;
         this.components = new ArrayList<>();
@@ -132,7 +133,7 @@ public class Container extends Component {
         final int usableHeight = contentGrid().get().height();
 
         if (usableWidth < 0 || usableHeight < 0) return;
-        updateChildrenSizes(order == RenderOrder.TOP_TO_BOTTOM, usableWidth, usableHeight);
+        updateChildrenSizes(order == ComponentOrder.TOP_TO_BOTTOM, usableWidth, usableHeight);
     }
 
     private void updateChildrenSizes(final boolean useY, final int usableWidth, final int usableHeight) {
@@ -180,6 +181,7 @@ public class Container extends Component {
 
     public void updateContent() {
         super.updateContent();
+        fullGrid().ifPresent(CharacterGrid::cleanUp);
         components.forEach(Component::updateContent);
     }
 
