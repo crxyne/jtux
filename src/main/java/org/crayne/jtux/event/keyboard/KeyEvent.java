@@ -1,17 +1,26 @@
 package org.crayne.jtux.event.keyboard;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public class KeyEvent {
 
+    @NotNull
     private final Keycode keycode;
+
+    @NotNull
     private final List<Keycode> heldDown;
+
+    @Nullable
     private final Integer character;
+
+    @NotNull
     private final KeyEventType pressType;
 
-    public KeyEvent(@NotNull final Keycode keycode, @NotNull final Collection<Keycode> heldDown, final Integer character, @NotNull final KeyEventType pressType) {
+    public KeyEvent(@NotNull final Keycode keycode, @NotNull final Collection<Keycode> heldDown,
+                    @Nullable final Integer character, @NotNull final KeyEventType pressType) {
         this.keycode = keycode;
         this.heldDown = new ArrayList<>(heldDown);
         this.character = character;
@@ -25,13 +34,15 @@ public class KeyEvent {
         this.pressType = KeyEventType.PRESS;
     }
 
-    public KeyEvent(@NotNull final Keycode keycode, final Integer character, @NotNull final KeyEventType pressType) {
+    public KeyEvent(@NotNull final Keycode keycode, @Nullable final Integer character,
+                    @NotNull final KeyEventType pressType) {
         this.keycode = keycode;
         this.heldDown = new ArrayList<>();
         this.character = character;
         this.pressType = pressType;
     }
 
+    @NotNull
     public static KeyEvent empty() {
         return new KeyEvent(Keycode.UNKNOWN, Collections.emptyList(), null, KeyEventType.UNKNOWN);
     }
@@ -41,6 +52,7 @@ public class KeyEvent {
                 && character().isEmpty() && pressType == KeyEventType.UNKNOWN;
     }
 
+    @NotNull
     public static KeyEvent keybind(@NotNull final Keycode keycode, @NotNull final Keycode... heldDown) {
         return new KeyEvent(keycode, heldDown);
     }
@@ -78,30 +90,34 @@ public class KeyEvent {
         return ctrl() || alt();
     }
 
+    @NotNull
     public KeyEventType pressType() {
         return pressType;
     }
 
+    @NotNull
     public Optional<Integer> character() {
         final Integer c = character == null || character > 60000 || character <= 0 ? null : character == '\n' ? '\r' : character;
         if (c != null && !keycode.expected(c)) return Optional.of(keycode.expect());
         return Optional.ofNullable(c);
     }
 
+    @NotNull
     public Keycode keycode() {
         return keycode;
     }
 
+    @NotNull
     public List<Keycode> heldDown() {
         return heldDown;
     }
 
-    public boolean same(@NotNull final KeyEvent other) {
+    public boolean sameKeycode(@NotNull final KeyEvent other) {
         return keycode == other.keycode;
     }
 
-    public boolean sameStrict(@NotNull final KeyEvent other) {
-        return same(other) && (new HashSet<>(heldDown).containsAll(other.heldDown) && (heldDown.isEmpty() || !other.heldDown.isEmpty()));
+    public boolean sameKeyEvent(@NotNull final KeyEvent other) {
+        return sameKeycode(other) && (new HashSet<>(heldDown).containsAll(other.heldDown) && (heldDown.isEmpty() || !other.heldDown.isEmpty()));
     }
 
     public boolean equals(final Object o) {
@@ -109,13 +125,14 @@ public class KeyEvent {
         if (o == null || getClass() != o.getClass()) return false;
 
         final KeyEvent keyEvent = (KeyEvent) o;
-        return sameStrict(keyEvent);
+        return sameKeyEvent(keyEvent);
     }
 
     public int hashCode() {
         return keycode.hashCode();
     }
 
+    @NotNull
     public String toString() {
         return "KeyEvent{" +
                 "keycode=" + keycode +
@@ -124,4 +141,5 @@ public class KeyEvent {
                 ", pressType=" + pressType +
                 '}';
     }
+
 }

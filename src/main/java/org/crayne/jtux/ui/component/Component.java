@@ -127,7 +127,7 @@ public abstract class Component {
         return ready;
     }
 
-    public abstract void render();
+    public abstract void render(@NotNull final CharacterGrid contentGrid);
 
     @NotNull
     public Optional<AbstractBorder> border() {
@@ -189,7 +189,7 @@ public abstract class Component {
     public void updateContent() {
         if (contentGrid == null || !ready) return;
 
-        if (!hidden) render();
+        if (!hidden) render(contentGrid);
         contentGrid.cleanUp();
         contentGrid.flush();
     }

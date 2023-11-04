@@ -223,7 +223,7 @@ public class Container extends Component {
         updateChildrenSizes();
     }
 
-    public void render() {
+    public void render(@NotNull final CharacterGrid contentGrid) {
 
     }
 

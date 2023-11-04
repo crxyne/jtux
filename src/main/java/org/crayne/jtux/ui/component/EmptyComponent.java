@@ -2,6 +2,7 @@ package org.crayne.jtux.ui.component;
 
 import org.crayne.jtux.ui.border.AbstractBorder;
 import org.crayne.jtux.ui.component.layout.Alignment;
+import org.crayne.jtux.ui.grid.CharacterGrid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,7 +68,7 @@ public class EmptyComponent extends Component {
 
     }
 
-    public void render() {
+    public void render(@NotNull final CharacterGrid contentGrid) {
 
     }
 

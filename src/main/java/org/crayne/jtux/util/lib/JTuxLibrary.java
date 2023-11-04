@@ -51,11 +51,11 @@ public class JTuxLibrary {
     public static final SystemOutCharacterGrid out = new SystemOutCharacterGrid();
 
     public static int terminalWidth() {
-        return NativeJTuxLibrary.terminalWidth();
+        return NativeJTuxLibrary.terminalWidth() + 1;
     }
 
     public static int terminalHeight() {
-        return NativeJTuxLibrary.terminalHeight();
+        return NativeJTuxLibrary.terminalHeight() + 1;
     }
 
     public static void cursorVisible(final boolean b) {
