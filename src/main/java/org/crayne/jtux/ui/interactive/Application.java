@@ -2,16 +2,14 @@ package org.crayne.jtux.ui.interactive;
 
 import org.crayne.jtux.event.keyboard.KeyEvent;
 import org.crayne.jtux.event.keyboard.KeyListener;
+import org.crayne.jtux.event.keyboard.Keycode;
 import org.crayne.jtux.event.window.WindowEvent;
 import org.crayne.jtux.event.window.WindowListener;
 import org.crayne.jtux.ui.component.Container;
 import org.crayne.jtux.ui.grid.CharacterGrid;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class Application {
@@ -44,6 +42,43 @@ public class Application {
         this.selectorKeyEvents = new HashSet<>(selectorKeyEvents);
         this.clickKeyEvents = new HashSet<>(clickKeyEvents);
         this.keyEventHandler = keyEventHandler;
+    }
+
+    @NotNull
+    public static Application staticApplication(@NotNull final Container rootContainer) {
+        return new Application(rootContainer, new WindowManager(List.of()), List.of(), List.of(), k -> {});
+    }
+
+    @NotNull
+    public static Application interactiveApplication(@NotNull final Container rootContainer,
+                                                     @NotNull final WindowManager windowManager,
+                                                     @NotNull final Collection<KeyEvent> selectorKeyEvents,
+                                                     @NotNull final Collection<KeyEvent> clickKeyEvents,
+                                                     @NotNull final Consumer<KeyEvent> keyEventHandler) {
+
+        return new Application(rootContainer, windowManager, selectorKeyEvents, clickKeyEvents, keyEventHandler);
+    }
+
+    @NotNull
+    private static final List<KeyEvent> DEFAULT_SELECTOR = List.of(KeyEvent.keybind(Keycode.TAB));
+
+    @NotNull
+    private static final List<KeyEvent> DEFAULT_CLICK = List.of(
+            KeyEvent.keybind(Keycode.ENTER),
+            KeyEvent.keybind(Keycode.SPACE)
+    );
+
+    @NotNull
+    public static Application interactiveApplication(@NotNull final Container rootContainer,
+                                                     @NotNull final WindowManager windowManager) {
+        return new Application(rootContainer, windowManager, DEFAULT_SELECTOR, DEFAULT_CLICK, k -> {});
+    }
+
+    @NotNull
+    public static Application interactiveApplication(@NotNull final Container rootContainer,
+                                                     @NotNull final WindowManager windowManager,
+                                                     @NotNull final Consumer<KeyEvent> keyEventHandler) {
+        return new Application(rootContainer, windowManager, DEFAULT_SELECTOR, DEFAULT_CLICK, keyEventHandler);
     }
 
     @NotNull

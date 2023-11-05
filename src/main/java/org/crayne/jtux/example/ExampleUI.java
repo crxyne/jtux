@@ -37,14 +37,7 @@ public class ExampleUI {
         ));
 
         windowManager.select(0);
-
-        final List<KeyEvent> selectorKeybinds = List.of(KeyEvent.keybind(Keycode.TAB));
-        final List<KeyEvent> clickKeybinds = List.of(
-                KeyEvent.keybind(Keycode.ENTER),
-                KeyEvent.keybind(Keycode.SPACE)
-        );
-
-        application = new Application(parent, windowManager, selectorKeybinds, clickKeybinds, this::handleKeyEvent);
+        application = Application.interactiveApplication(parent, windowManager, this::handleKeyEvent);
     }
 
     public void start() {

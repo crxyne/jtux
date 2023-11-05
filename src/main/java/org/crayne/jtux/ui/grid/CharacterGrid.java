@@ -209,6 +209,29 @@ public abstract class CharacterGrid {
         return coordY;
     }
 
+    public int linesPrintedWrap(@NotNull final Vec2i coord, @NotNull final Text text) {
+        int offsetX = 0, offsetY = 0;
+        final int width = width(), height = height();
+        int coordX = coord.x();
+        final int coordY = coord.y();
+
+        for (final TextPart part : text.parts())  {
+            int length = part.text().length();
+            if (length == 0) continue;
+
+            while (offsetX + coordX + length > width) {
+                length -= width - offsetX - coordX;
+                offsetY++;
+                offsetX = 0;
+                coordX = 0;
+
+                if (offsetY > height) return offsetY;
+            }
+            offsetX += length;
+        }
+        return offsetY;
+    }
+
     public int writeLineWrap(@NotNull final Vec2i coord, @NotNull final Text text) {
         int offsetX = 0, offsetY = 0;
         final int width = width(), height = height();

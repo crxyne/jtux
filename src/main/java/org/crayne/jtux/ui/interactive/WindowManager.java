@@ -29,8 +29,13 @@ public class WindowManager {
         select(currentlyFocusedIndex + 1);
     }
 
+    public void deselectCurrent() {
+        select(null);
+    }
+
     public void select(final int index) {
         if (windows.isEmpty()) return;
+        if (index < 0) deselectCurrent();
 
         currentlyFocusedIndex = index % windows.size();
         select(windows.get(currentlyFocusedIndex));

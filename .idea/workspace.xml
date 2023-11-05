@@ -9,20 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="added spacer components">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExamplePanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/interactive/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/interactive/Clickable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/interactive/Focusable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/interactive/Interactable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/interactive/WindowManager.java" afterDir="false" />
+    <list default="true" id="36689e6f-c158-43c7-8f47-96c4b70e0e17" name="Changes" comment="added interactive ui api and changed example">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/jtux_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/jtux_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/keyboard/KeyEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/event/keyboard/KeyEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/example/ExampleUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/Component.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/Container.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/EmptyComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/component/EmptyComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/util/lib/JTuxLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/grid/CharacterGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/grid/CharacterGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/interactive/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/interactive/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/interactive/WindowManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/crayne/jtux/ui/interactive/WindowManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699118676795</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="added interactive ui api and changed example">
+      <created>1699125774637</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1699125774637</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -271,6 +272,7 @@
     <MESSAGE value="added component hiding to containers" />
     <MESSAGE value="added component hiding to containers &amp; refactoring" />
     <MESSAGE value="added spacer components" />
-    <option name="LAST_COMMIT_MESSAGE" value="added spacer components" />
+    <MESSAGE value="added interactive ui api and changed example" />
+    <option name="LAST_COMMIT_MESSAGE" value="added interactive ui api and changed example" />
   </component>
 </project>
